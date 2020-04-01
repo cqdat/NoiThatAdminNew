@@ -31,6 +31,8 @@ namespace NoiThatAdmin.Models.DataModels
 
         public bool? IsActive { get; set; }
 
+        public int? CatetoryID { get; set; }
+
         public DateTime? Created { get; set; }
 
         public int? CreatedBy { get; set; }
@@ -39,5 +41,7 @@ namespace NoiThatAdmin.Models.DataModels
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BlogComment> BlogComments { get; set; }
+
+        public virtual Category Category { get; set; }
     }
 }

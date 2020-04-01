@@ -1,26 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using NoiThatAdmin.Models.DataModels;
 using PagedList;
 using NoiThatAdmin.Utilities;
+using System.Net;
+using System.Data.Entity;
 
 namespace NoiThatAdmin.Controllers
 {
-    public class CategoriesController : BaseController
+    public class BlogCategoriesController : BaseController
     {
         private TanThoiEntities db = new TanThoiEntities();
         Helpers h = new Helpers();
 
-        // GET: Categories
+        // GET: BlogCategories
         public ActionResult Index()
         {
-            ViewData["ListCate"] = db.Categories.Where(c => c.TypeCate == WebConstants.CategoryProduct).ToList();
+            ViewData["ListCate"] = db.Categories.Where(c => c.TypeCate == WebConstants.CategoryNews).ToList();
             return View();
         }
 
@@ -34,11 +33,11 @@ namespace NoiThatAdmin.Controllers
 
             if (pageSize == -1)
             {
-                pageSize = db.Categories.Where(c => c.TypeCate == WebConstants.CategoryProduct).ToList().Count;
+                pageSize = db.Categories.Where(c => c.TypeCate == WebConstants.CategoryNews).ToList().Count;
             }
             ViewBag.PageSize = pageSize;
 
-            var lstCates = db.Categories.Where(c => c.TypeCate == WebConstants.CategoryProduct).ToList();
+            var lstCates = db.Categories.Where(c => c.TypeCate == WebConstants.CategoryNews).ToList();
             if (!string.IsNullOrEmpty(TenChungLoai))
             {
                 lstCates = lstCates.Where(s => s.CategoryName.ToUpper().Contains(TenChungLoai.ToUpper())).ToList();
@@ -63,11 +62,16 @@ namespace NoiThatAdmin.Controllers
             ViewBag.TotalRow = count;
             if (Request.IsAjaxRequest())
             {
-                return PartialView("~/Views/Categories/_PartialIndex.cshtml", lstCates.ToList().ToPagedList(pageNumber ?? 1, pageSize ?? 2));
+                return PartialView("~/Views/BlogCategories/_PartialIndex.cshtml", lstCates.ToList().ToPagedList(pageNumber ?? 1, pageSize ?? 2));
             }
             return View(lstCates.ToList().ToPagedList(pageNumber ?? 1, pageSize ?? 2));
         }
-        // GET: Categories/Details/5
+
+        /// <summary>
+        /// Chi Tiết Loại TIn tức
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -82,10 +86,11 @@ namespace NoiThatAdmin.Controllers
             return View(category);
         }
 
+
         // GET: Categories/Create
         public ActionResult Create()
         {
-            ViewData["ListCate"] = db.Categories.Where(c => c.TypeCate == WebConstants.CategoryProduct && c.Parent == 0).ToList();
+            ViewData["ListCate"] = db.Categories.Where(c => c.TypeCate == WebConstants.CategoryNews && c.Parent == 0).ToList();
             return View();
         }
 
@@ -98,17 +103,18 @@ namespace NoiThatAdmin.Controllers
         {
             if (ModelState.IsValid)
             {
-                category.TypeCate = WebConstants.CategoryProduct;
+                category.TypeCate = WebConstants.CategoryNews;
                 category.SEOUrlRewrite = Helpers.ConvertToUpperLower(category.CategoryName);
                 db.Categories.Add(category);
                 db.SaveChanges();
                 Success(string.Format("Thêm mới <b>{0}</b> thành công, Bạn có thể chọn slide hình ảnh cho <b>{0}</b>.", category.CategoryName), true);
                 //return RedirectToAction("Index");
-                return RedirectToAction("Edit", "Categories", new { id = category.CategoryID });
+                return RedirectToAction("Index", "BlogCategories");
             }
 
             return View(category);
         }
+
 
         // GET: Categories/Edit/5
         public ActionResult Edit(int? id)
@@ -122,7 +128,7 @@ namespace NoiThatAdmin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewData["ListCate"] = db.Categories.Where(c => c.TypeCate == WebConstants.CategoryProduct && c.Parent == 0).ToList();
+            ViewData["ListCate"] = db.Categories.Where(c => c.TypeCate == WebConstants.CategoryNews && c.Parent == 0).ToList();
             return View(category);
         }
 
@@ -135,48 +141,13 @@ namespace NoiThatAdmin.Controllers
         {
             if (ModelState.IsValid)
             {
-                category.TypeCate = WebConstants.CategoryProduct;
+                category.TypeCate = WebConstants.CategoryNews;
                 category.SEOUrlRewrite = Helpers.ConvertToUpperLower(category.CategoryName);
                 db.Entry(category).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(category);
-        }
-
-        // GET: Categories/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Category category = db.Categories.Find(id);
-            if (category == null)
-            {
-                return HttpNotFound();
-            }
-            return View(category);
-        }
-
-        // POST: Categories/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Category category = db.Categories.Find(id);
-            db.Categories.Remove(category);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

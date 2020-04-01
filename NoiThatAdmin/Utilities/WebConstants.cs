@@ -15,5 +15,9 @@ namespace NoiThatAdmin.Utilities
         public static string ImgProductThumbsShow = "Photos/Products/_thumbs";
 
         public static string DatetimeFormatVI = "dd/MM/yyyy";
+
+        public static int CategoryProduct = 1;
+        public static int CategoryCollection = 2;
+        public static int CategoryNews = 3;
     }
 }

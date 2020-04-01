@@ -7,15 +7,15 @@
 <div id="page-heading">
     <ol class="breadcrumb">
         <li><a href="index.html">Trang chủ</a></li>
-        <li class="active">Danh sách chủng loại Sản phẩm</li>
+        <li class="active">Danh sách Tin Tức</li>
 
     </ol>
 
-    <h1>Loại Sản phẩm</h1>
+    <h1>Danh mục tin tức</h1>
     <div class="options">
         <div class="btn-toolbar">
 
-            <a href="/Categories/Create/" class="btn btn-success btn-label"><i class="fa fa-plus"></i>Thêm mới</a>
+            <a href="/BlogCategories/Create/" class="btn btn-success btn-label"><i class="fa fa-plus"></i>Thêm mới</a>
         </div>
     </div>
 </div>
@@ -33,7 +33,7 @@
                 </select>
             </div>
             <div class="col-xs-2">
-                Tên chủng loại<br />
+                Tiêu đề tin tức<br />
                 <input type="text" id="txtTenChungLoai" name="txtTenChungLoai" class="form-control txtSearch" placeholder="Nhập tên...">
             </div>
             <div class="col-xs-2">
@@ -102,7 +102,7 @@
         var SEOKeywords = $("#SEOKeywords").val();
         $.ajax({
             //url: '/BDS_TinTuc/_PartialIndex',
-            url: '@Url.Action("_PartialIndex", "Categories")',
+            url: '@Url.Action("_PartialIndex", "BlogCategories")',
             data: {
                 pageSize: parseInt($('#ddlPageSize').val()),
                 TenChungLoai: TenChungLoai,
