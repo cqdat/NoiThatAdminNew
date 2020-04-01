@@ -16,6 +16,7 @@ using PagedList;
 
 namespace NoiThatAdmin.Controllers
 {
+    
     public class ProductsController : BaseController
     {
         private TanThoiEntities db = new TanThoiEntities();

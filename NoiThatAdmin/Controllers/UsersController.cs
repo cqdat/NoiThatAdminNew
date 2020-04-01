@@ -7,112 +7,115 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using NoiThatAdmin.Models.DataModels;
-using NoiThatAdmin.Utilities;
 
 namespace NoiThatAdmin.Controllers
 {
-    [AuthorizeCustom]
-    public class InformationController : Controller
+    public class UsersController : Controller
     {
         private TanThoiEntities db = new TanThoiEntities();
 
-        // GET: Information
+        // GET: Users
         public ActionResult Index()
         {
-            return View(db.Information.ToList());
+            var users = db.Users.Include(u => u.User1);
+            return View(users.ToList());
         }
 
-        // GET: Information/Details/5
+        // GET: Users/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Information information = db.Information.Find(id);
-            if (information == null)
+            User user = db.Users.Find(id);
+            if (user == null)
             {
                 return HttpNotFound();
             }
-            return View(information);
+            return View(user);
         }
 
-        // GET: Information/Create
+        // GET: Users/Create
         public ActionResult Create()
         {
+            ViewBag.CreatedBy = new SelectList(db.Users, "UserID", "UserName");
             return View();
         }
 
-        // POST: Information/Create
+        // POST: Users/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "InfoID,InfoCode,InfoContent")] Information information)
+        public ActionResult Create([Bind(Include = "UserID,UserName,HashPass,Active,Created,CreatedBy")] User user)
         {
             if (ModelState.IsValid)
             {
-                db.Information.Add(information);
+                db.Users.Add(user);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(information);
+            ViewBag.CreatedBy = new SelectList(db.Users, "UserID", "UserName", user.CreatedBy);
+            return View(user);
         }
 
-        // GET: Information/Edit/5
+        // GET: Users/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Information information = db.Information.Find(id);
-            if (information == null)
+            User user = db.Users.Find(id);
+            if (user == null)
             {
                 return HttpNotFound();
             }
-            return View(information);
+            ViewBag.CreatedBy = new SelectList(db.Users, "UserID", "UserName", user.CreatedBy);
+            return View(user);
         }
 
-        // POST: Information/Edit/5
+        // POST: Users/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "InfoID,InfoCode,InfoContent")] Information information)
+        public ActionResult Edit([Bind(Include = "UserID,UserName,HashPass,Active,Created,CreatedBy")] User user)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(information).State = EntityState.Modified;
+                db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(information);
+            ViewBag.CreatedBy = new SelectList(db.Users, "UserID", "UserName", user.CreatedBy);
+            return View(user);
         }
 
-        // GET: Information/Delete/5
+        // GET: Users/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Information information = db.Information.Find(id);
-            if (information == null)
+            User user = db.Users.Find(id);
+            if (user == null)
             {
                 return HttpNotFound();
             }
-            return View(information);
+            return View(user);
         }
 
-        // POST: Information/Delete/5
+        // POST: Users/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Information information = db.Information.Find(id);
-            db.Information.Remove(information);
+            User user = db.Users.Find(id);
+            db.Users.Remove(user);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
