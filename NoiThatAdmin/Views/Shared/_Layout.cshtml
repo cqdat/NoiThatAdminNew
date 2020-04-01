@@ -32,31 +32,11 @@
 
 
         <div class="navbar-header pull-left">
-            <a class="navbar-brand" href="index.html">Avant</a>
+            <a class="navbar-brand" href="/">Tân Thời</a>
         </div>
 
-        <ul class="nav navbar-nav pull-right toolbar">
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle username" data-toggle="dropdown"><span class="hidden-xs">John McCartney <i class="fa fa-caret-down"></i></span><img src="~/assets/demo/avatar/dangerfield.png" alt="Dangerfield" /></a>
-                <ul class="dropdown-menu userinfo arrow">
-                    <li class="username">
-                        <a href="#">
-                            <div class="pull-left"><img src="~/assets/demo/avatar/dangerfield.png" alt="Jeff Dangerfield" /></div>
-                            <div class="pull-right"><h5>Howdy, John!</h5><small>Logged in as <span>john275</span></small></div>
-                        </a>
-                    </li>
-                    <li class="userlinks">
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Edit Profile <i class="pull-right fa fa-pencil"></i></a></li>
-                            <li><a href="#">Account <i class="pull-right fa fa-cog"></i></a></li>
-                            <li><a href="#">Help <i class="pull-right fa fa-question-circle"></i></a></li>
-                            <li class="divider"></li>
-                            <li><a href="#" class="text-right">Sign Out</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-        </ul>
+        @Html.Partial("_logged")
+        
     </header>
 
     <div id="page-container">
@@ -77,9 +57,9 @@
                     <a href="javascript:;"><i class="fa fa-th"></i> <span>Chủng loại Sản phẩm</span> </a>
                     <ul class="acc-menu">
                         <li><a href="/Categories/Create"><span>Thêm mới</span></a></li>
-                        <li><a href="/Categories/Index"><span>Danh sách</span></a></li>
-                        <li><a href="layout-horizontal.html"><span>Slide Mặc định</span></a></li>
-                        
+                        <li><a href="/Categories/Index"><span>Danh sách Chủng loại SP</span></a></li>
+                        <li><a href="#"><span>Slides Mặc định</span></a></li>
+                        <li><a href="layout-fixed.html"><span>Fixed Boxed Layout</span></a></li>
                     </ul>
                 </li>
                 <li>
@@ -94,10 +74,10 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="javascript:;"><i class="fa fa-tasks"></i> <span>UI Components</span> <span class="badge badge-info">12</span></a>
+                    <a href="javascript:;"><i class="fa fa-tasks"></i> <span>Các Danh Mục</span> <span class="badge badge-info">12</span></a>
                     <ul class="acc-menu">
-                        <li><a href="ui-tiles.html">Tiles</a></li>
-                        <li><a href="ui-modals.html">Modals &amp; Bootbox</a></li>
+                        <li><a href="/Home/ListMenus">Menus</a></li>
+                        <li><a href="ui-modals.html">Các bài viết</a></li>
                         <li><a href="ui-progressbars.html">Progress Bars</a></li>
                         <li><a href="ui-paginations.html">Pagers &amp; Paginations</a></li>
                         <li><a href="ui-breadcrumbs.html">Breadcrumbs</a></li>
