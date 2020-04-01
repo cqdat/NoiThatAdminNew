@@ -1,0 +1,121 @@
+﻿@model NoiThatAdmin.Models.MenuViewModel
+@using NoiThatAdmin.Utilities
+@{
+    ViewBag.Title = "ListMenus";
+    Helpers h = new Helpers();
+}
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="index.html">Trang chủ</a></li>
+        <li class="active">Danh Mục Menu</li>
+
+    </ol>
+
+    <h1>Danh mục Menus</h1>
+    <div class="options">
+        <div class="btn-toolbar">
+
+            <a href="/Categories/Create/" class="btn btn-success btn-label"><i class="fa fa-plus"></i>Thêm mới</a>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="dd" id="nestable_list_1">
+        <ol class="dd-list">
+            <li class="dd-item" data-id="1">
+                <div class="dd-handle">
+                    Trang Chủ
+
+                </div>
+            </li>
+            <li class="dd-item" data-id="1">
+                <div class="dd-handle">
+                    Giới Thiệu
+                    <span style="float:right;"><a href="#"> Chỉnh Sửa</a></span>
+                </div>
+
+            </li>
+            <li class="dd-item" data-id="2">
+
+                <div class="dd-handle">Sản phẩm</div>
+                <ol class="dd-list">
+                    @foreach (var i in Model.lstMenuCha)
+                    {
+                        <li class="dd-item" data-id="@i.CategoryID">
+
+                            <div class="dd-handle">@i.CategoryName</div>
+                            <ol class="dd-list">
+                                @foreach (var j in h.lstGetChildMenu(i.CategoryID))
+                                {
+                                    <li class="dd-item" data-id="@j.CategoryID">
+                                        <div class="dd-handle">@j.CategoryName</div>
+                                    </li>
+                                }
+                            </ol>
+                        </li>
+                    }
+
+
+                </ol>
+            </li>
+            <li class="dd-item" data-id="2">
+
+                <div class="dd-handle">Bộ Sưu tập</div>
+                <ol class="dd-list">
+                    @foreach (var i in Model.lstMenuCha)
+                    {
+                        <li class="dd-item" data-id="@i.CategoryID">
+
+                            <div class="dd-handle">@i.CategoryName</div>
+                            <ol class="dd-list">
+                                @foreach (var j in h.lstGetChildMenu(i.CategoryID))
+                                {
+                                    <li class="dd-item" data-id="@j.CategoryID">
+                                        <div class="dd-handle">@j.CategoryName</div>
+                                    </li>
+                                }
+                            </ol>
+                        </li>
+                    }
+
+
+                </ol>
+            </li>
+            <li class="dd-item" data-id="5">
+
+                <div class="dd-handle">Dịch Vụ</div>
+                <ol class="dd-list">
+                    <li class="dd-item" data-id="6">
+                        <div class="dd-handle">Thiết kế nội thất</div>
+                    </li>
+                    <li class="dd-item" data-id="7">
+                        <div class="dd-handle">Thi công nội thất</div>
+                    </li>
+
+                </ol>
+            </li>
+            <li class="dd-item" data-id="5">
+
+                <div class="dd-handle">Tin tức - Tư vấn</div>
+                <ol class="dd-list">
+                    <li class="dd-item" data-id="6">
+                        <div class="dd-handle">Tin tức</div>
+                    </li>
+                    <li class="dd-item" data-id="7">
+                        <div class="dd-handle">Phong Thủy</div>
+                    </li>
+                    <li class="dd-item" data-id="7">
+                        <div class="dd-handle">Tư Vấn</div>
+                    </li>
+                </ol>
+            </li>
+            <li class="dd-item" data-id="12">
+                <div class="dd-handle">
+                    Liên hệ
+                    <span style="float:right;"><a href="#"> Chỉnh Sửa</a></span>
+                </div>
+            </li>
+        </ol>
+    </div>
+</div>
+

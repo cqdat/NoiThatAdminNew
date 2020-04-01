@@ -13,7 +13,7 @@
     <div class="options">
         <div class="btn-toolbar">
 
-            <a href="Products/Create/" class="btn btn-success btn-label"><i class="fa fa-plus"></i>Thêm mới</a>
+            <a href="/Products/Create/" class="btn btn-success btn-label"><i class="fa fa-plus"></i>Thêm mới</a>
         </div>
     </div>
 </div>
@@ -31,15 +31,31 @@
                 </select>
             </div>
             <div class="col-xs-2">
-                Tên chủng loại<br />
+                Mã SP<br />
+                <input type="text" id="txtMaSP" name="txtMaSP" class="form-control txtSearch" placeholder="Nhập Mã Sản phẩm...">
+            </div>
+            <div class="col-xs-2">
+                Tên SP<br />
                 <input type="text" id="txtSanPham" name="txtSanPham" class="form-control txtSearch" placeholder="Nhập tên...">
             </div>
             <div class="col-xs-2">
                 Danh Mục Cha<br />
 
                 <select class="form-control drChange" id="ParentId" name="ParentId">
-                    <option value="">Tất cả</option>
-                    <option value="0">Menu Cha</option>
+                    <option value="">--Tất cả--</option>
+                    @foreach (var i in (List<NoiThatAdmin.Models.DataModels.Category>)ViewData["ListCateParent"])
+                    {
+                        <option value="@i.CategoryID">@i.CategoryName</option>
+                    }
+
+                </select>
+            </div>
+            <div class="col-xs-2">
+                Danh Mục Con<br />
+
+                <select class="form-control drChange" id="CategoryID" name="CategoryID">
+                    <option value="">--Tất cả--</option>
+
                     @foreach (var i in (List<NoiThatAdmin.Models.DataModels.Category>)ViewData["ListCate"])
                     {
                         <option value="@i.CategoryID">@i.CategoryName</option>
@@ -47,7 +63,7 @@
 
                 </select>
             </div>
-            <div class="col-xs-4">
+            <div class="col-xs-3">
                 Tìm theo từ khóa
                 <br />
                 <input type="text" id="SEOKeywords" class="form-control txtSearch" placeholder="nhập từ khóa">
@@ -92,20 +108,25 @@
                 filter();
             });
 
+
+
     });
 
     function filter() {
-
+        var MaSP = $("#txtMaSP").val();
         var SanPham = $("#txtSanPham").val();
         var DanhMucCha = $("#ParentId").val();
+        var DanhMucCon = $("#CategoryID").val();
         var SEOKeywords = $("#SEOKeywords").val();
         $.ajax({
             //url: '/BDS_TinTuc/_PartialIndex',
             url: '@Url.Action("_PartialIndex", "Products", new { area = "Cpanel" })',
             data: {
                 pageSize: parseInt($('#ddlPageSize').val()),
+                MaSP:MaSP,
                 SanPham: SanPham,
                 DanhMucCha: DanhMucCha,
+                DanhMucCon:DanhMucCon,
                 SEOKeywords:SEOKeywords
             },
             method: 'GET',

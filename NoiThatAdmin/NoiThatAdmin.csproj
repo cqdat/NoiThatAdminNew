@@ -207,6 +207,7 @@
     <Compile Include="Models\DataModels\User.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MenuViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utilities\Alert.cs" />
@@ -510,6 +511,7 @@
     <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\Products\_PartialIndex.cshtml" />
     <Content Include="Views\Shared\_Alerts.cshtml" />
+    <Content Include="Views\Home\ListMenus.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

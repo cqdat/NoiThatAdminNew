@@ -1,194 +1,247 @@
 ﻿@model NoiThatAdmin.Models.DataModels.Product
-
+@using NoiThatAdmin.Utilities
 @{
     ViewBag.Title = "Details";
 }
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="index.html">Trang chủ</a></li>
+        <li class="active">Chi tiết @Model.ProductName</li>
 
-<h2>Details</h2>
+    </ol>
 
-<div>
-    <h4>Product</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Category.CategoryName)
-        </dt>
+    <h1>Chi tiết</h1>
+    <div class="options">
+        <div class="btn-toolbar">
 
-        <dd>
-            @Html.DisplayFor(model => model.Category.CategoryName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Category1.CategoryName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Category1.CategoryName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.User.UserName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.User.UserName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ProductCode)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ProductCode)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ProductName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ProductName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PriceSale)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PriceSale)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Images)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Images)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ImagesThumb)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ImagesThumb)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ShortDescription)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ShortDescription)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Content)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Content)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.InStock)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.InStock)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsSale)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsSale)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsNew)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsNew)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Rating)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Rating)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsActive)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsActive)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CountView)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CountView)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Created)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Created)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SEOTitle)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SEOTitle)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SEOUrlRewrite)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SEOUrlRewrite)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SEOKeywords)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SEOKeywords)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SEOMetadescription)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SEOMetadescription)
-        </dd>
-
-    </dl>
+            <a href="/Products/Edit/@Model.ProductID" class="btn btn-success btn-label"><i class="fa fa-edit"></i>Chỉnh sửa</a>
+            <a href="/Products/Index" class="btn btn-primary">Quay Lại</a>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ProductID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div class="container" style="padding:5px;">
+    @{ Html.RenderPartial("_Alerts"); }
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-midnightblue">
+                <div class="panel-body">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img src="~/@WebConstants.ImgProductShow/@Model.Images" alt="" class="pull-left" style="margin: 0 20px 20px 0; width:100px">
+                            <div class="table-responsive">
+                                <h4>Tên SP: <strong>@Model.ProductName</strong>(@Model.ProductCode)</h4>
+                                <table class="table table-condensed">
+
+                                    <!-- <thead>
+                                        <tr>
+                                            <th width="50%"></th>
+                                            <th width="50%"></th>
+                                        </tr>
+                                    </thead> -->
+                                    <tbody>
+                                        <tr>
+                                            <td>DM Cha</td>
+                                            <td><a href="#">@Model.Category.CategoryName</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>DM Con</td>
+                                            <td><a href="#">@Model.Category1.CategoryName</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>SP Mới</td>
+                                            <td>
+                                                @if (Model.IsNew == true)
+                                                {
+                                                    <span class="badge badge-danger">Sản Phẩm mới</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge">#</span>
+                                                }
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>SP Sale</td>
+                                            <td>
+                                                @if (Model.IsSale == true)
+                                                {
+                                                    <span class="badge badge-warning">Đang sale</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge">#</span>
+                                                }
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Lượt xem</td>
+                                            <td>
+                                                <span class="badge badge-info">@Model.CountView</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ẩn/Hiện Website</td>
+                                            <td>
+                                                @if (Model.IsActive == true)
+                                                {
+                                                    <span class="badge badge-success">Đang hiện thị</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge">Ẩn</span>
+                                                }
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tình Trạng</td>
+                                            <td>
+                                                @if (Model.InStock == true)
+                                                {
+                                                    <span class="badge badge-success">Còn hàng</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge">Tạm hết hàng</span>
+                                                }
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tạo lúc</td>
+                                            <td>
+                                                @Convert.ToDateTime(Model.Created).ToString(WebConstants.DatetimeFormatVI)  bởi: <a>Admin</a>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Mô tả ngắn</h4>
+                            <p>
+                                @Model.ShortDescription
+                            </p>
+                            <h4>SEO Google</h4>
+                            <table class="table table-condensed">
+
+                                <tbody>
+                                    <tr>
+                                        <td>Page Title</td>
+                                        <td><a href="#">@Model.SEOTitle</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>URL thân thiện</td>
+                                        <td><a href="#">@Model.SEOUrlRewrite</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>SEO Keywords</td>
+                                        <td>@Model.SEOKeywords</td>
+                                    </tr>
+                                    <tr>
+                                        <td>SEO Metadescription</td>
+                                        <td>@Model.SEOMetadescription</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="tab-container tab-success">
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a href="#home1" data-toggle="tab">Bài viết</a></li>
+                                    <li class=""><a href="#profile1" data-toggle="tab">Hình ảnh</a></li>
+                                    <li class=""><a href="#profile2" data-toggle="tab">Tags</a></li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane active clearfix" id="home1">
+                                        @Html.Raw(Model.Content)
+                                    </div>
+
+                                    <div class="tab-pane" id="profile1">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th width="5%">#</th>
+                                                        <th width="35%">Project Title</th>
+                                                        <th width="35%">Due Date</th>
+                                                        <th width="25%">Progress</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>Lorem ipsum</td>
+                                                        <td>Nov 5, 2013</td>
+                                                        <td>
+                                                            <div class="progress progress-striped" style="margin:5px 0 0">
+                                                                <div class="progress-bar progress-bar-info" style="width: 30%;"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2</td>
+                                                        <td>Dignissimos voluptas</td>
+                                                        <td>Nov 10, 2013</td>
+                                                        <td>
+                                                            <div class="progress progress-striped" style="margin:5px 0 0">
+                                                                <div class="progress-bar progress-bar-danger" style="width: 55%;"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>3</td>
+                                                        <td>Tenetur ex ea dignissimos</td>
+                                                        <td>Nov 11, 2013</td>
+                                                        <td>
+                                                            <div class="progress progress-striped" style="margin:5px 0 0">
+                                                                <div class="progress-bar progress-bar-success" style="width: 35%;"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>4</td>
+                                                        <td>Quo dolorem maxime</td>
+                                                        <td>Nov 21, 2013</td>
+                                                        <td>
+                                                            <div class="progress progress-striped" style="margin:5px 0 0">
+                                                                <div class="progress-bar progress-bar-primary" style="width: 20%;"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>5</td>
+                                                        <td>Dsperiores</td>
+                                                        <td>Nov 17, 2013</td>
+                                                        <td>
+                                                            <div class="progress progress-striped" style="margin:5px 0 0">
+                                                                <div class="progress-bar progress-bar-inverse" style="width: 70%;"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="profile2">
+                                        Tags
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>

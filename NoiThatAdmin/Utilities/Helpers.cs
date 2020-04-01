@@ -27,6 +27,11 @@ namespace NoiThatAdmin.Utilities
             }
             
         }
+
+        public List<Category> lstGetChildMenu(int?ParentId)
+        {
+            return db.Categories.Where(c => c.Parent == ParentId).ToList();
+        }
         #region Rewrite string (Dung-cho-SEO-Google)
         /// <summary>
         /// Convert and rewrite string(tin-tuc-ho)
