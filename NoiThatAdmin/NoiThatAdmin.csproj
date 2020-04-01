@@ -212,6 +212,7 @@
     <Compile Include="Models\ImageHandler.cs" />
     <Compile Include="Models\JsonFiles.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MenuViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utilities\Alert.cs" />
@@ -574,14 +575,6 @@
     <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\Products\_PartialIndex.cshtml" />
     <Content Include="Views\Shared\_Alerts.cshtml" />
-    <Content Include="Views\Information\Create.cshtml" />
-    <Content Include="Views\Information\Delete.cshtml" />
-    <Content Include="Views\Information\Details.cshtml" />
-    <Content Include="Views\Information\Edit.cshtml" />
-    <Content Include="Views\Information\Index.cshtml" />
-    <Content Include="Views\ProductImage\Index.cshtml" />
-    <Content Include="Views\ProductImage\_form.cshtml" />
-    <Content Include="Views\Shared\_menu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
