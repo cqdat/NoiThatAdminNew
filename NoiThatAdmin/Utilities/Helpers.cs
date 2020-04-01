@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using NoiThatAdmin.Models.DataModels;
 
@@ -83,6 +85,35 @@ namespace NoiThatAdmin.Utilities
            "ÝỲỴỶỸ"
         };
         #endregion
+
+
+        public bool ValidateUser(string uname, string hpass)
+        {
+            hpass = GetMD5Hash(hpass);
+
+            var user = db.Users.FirstOrDefault(q => q.UserName == uname && q.HashPass == hpass);
+
+            if (user != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static string GetMD5Hash(string value)
+        {
+            MD5 md5Hasher = MD5.Create();
+            byte[] data = md5Hasher.ComputeHash(Encoding.Default.GetBytes(value));
+            StringBuilder sBuilder = new StringBuilder();
+            for (int i = 0; i < data.Length; i++)
+            {
+                sBuilder.Append(data[i].ToString("x2"));
+            }
+            return sBuilder.ToString();
+        }
 
     }
 }
