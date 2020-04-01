@@ -16,7 +16,7 @@ using PagedList;
 
 namespace NoiThatAdmin.Controllers
 {
-    public class ProductsController : Controller
+    public class ProductsController : BaseController
     {
         private TanThoiEntities db = new TanThoiEntities();
 
@@ -131,15 +131,19 @@ namespace NoiThatAdmin.Controllers
                 product.PriceSale = "0";
                 product.SEOUrlRewrite = Helpers.ConvertToUpperLower(product.ProductName);
                 product.Created = DateTime.Now;
+                //product.CreatedBy = db.Users.FirstOrDefault(q => q.UserName == User.Identity.Name).UserID;
                 product.CreatedBy = 1;
                 db.Products.Add(product);
                 db.SaveChanges();
+                Success(string.Format("Thêm mới sản phẩm<b>{0}</b> thành công.", product.ProductName), true);
                 return RedirectToAction("Index");
             }
 
             ViewBag.CategoryIDParent = new SelectList(db.Categories.Where(c => c.Parent == 0), "CategoryID", "CategoryName", product.CategoryIDParent);
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", product.CategoryID);
             ViewBag.CreatedBy = new SelectList(db.Users, "UserID", "UserName", product.CreatedBy);
+            Success(string.Format("Thêm mới sản phẩm<b>{0}</b> thành công.", product.ProductName), true);
+            //return RedirectToAction("Index");
             return View(product);
         }
 

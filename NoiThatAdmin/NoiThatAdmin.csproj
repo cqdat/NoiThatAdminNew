@@ -513,6 +513,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Photos\Collections\_thumbs\" />
+    <Folder Include="Photos\Products\_thumbs\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
