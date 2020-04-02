@@ -54,48 +54,52 @@
                 <table class="table table-striped table-hover xcont">
                     @foreach (var item in Model)
                     {
-                    <tr>
-                        <td style="width:100px">
-                            @item.Category.CategoryName
-                        </td>
+                        <tr>
+                            <td style="width:100px">
+                                
+                                    @item.Category.CategoryName
+                                
+                            </td>
 
-                        <td style="width:300px">
-                            @item.BlogName
-                        </td>
-                        <td>
-                            <img style="height:30px" src="@WebConstants.imgNewsURLShow/@item.ImageURL" alt="@item.BlogName" title="@item.BlogName" />
-                        </td>
+                            <td style="width:300px">
+                                <a href="/Blogs/Details/@item.BlogID">
+                                    @item.BlogName
+                                </a>
+                            </td>
+                            <td>
+                                <img style="height:30px" src="@WebConstants.imgNewsURLShow/@item.ImageURL" alt="@item.BlogName" title="@item.BlogName" />
+                            </td>
 
 
-                        <td style="width:70px">
-                            @item.CountView
-                        </td>
-                        <td style="width:70px">
-                            @if (item.IsActive == true)
-                            {
-                                <span class="badge badge-success">Hiện thị</span>
-                            }
-                            else
-                            {
-                                <span class="badge">Ẩn</span>
-                            }
-                        </td>
-                        <td>
-                            @Convert.ToDateTime(item.Created).ToString(WebConstants.DateFormatVI)
-                        </td>
-                        <td>
-                            @item.User.UserName
-                        </td>
-                        <td>
-                            @item.SEOKeywords
-                        </td>
+                            <td style="width:70px">
+                                @item.CountView
+                            </td>
+                            <td style="width:70px">
+                                @if (item.IsActive == true)
+                                {
+                                    <span class="badge badge-success">Hiện thị</span>
+                                }
+                                else
+                                {
+                                    <span class="badge">Ẩn</span>
+                                }
+                            </td>
+                            <td>
+                                @Convert.ToDateTime(item.Created).ToString(WebConstants.DateFormatVI)
+                            </td>
+                            <td>
+                                @item.User.UserName
+                            </td>
+                            <td>
+                                @item.SEOKeywords
+                            </td>
 
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.BlogID }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.BlogID }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.BlogID })
-                        </td>
-                    </tr>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.BlogID }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.BlogID }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.BlogID })
+                            </td>
+                        </tr>
                     }
                 </table>
             </div>

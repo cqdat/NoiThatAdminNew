@@ -611,6 +611,8 @@
     <Content Include="Views\Blogs\Edit.cshtml" />
     <Content Include="Views\Blogs\Index.cshtml" />
     <Content Include="Views\Blogs\_PartialIndex.cshtml" />
+    <Content Include="Views\Home\FormInput.cshtml" />
+    <Content Include="Views\Home\ListMenus.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
