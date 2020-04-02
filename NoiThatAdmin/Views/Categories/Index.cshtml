@@ -102,7 +102,7 @@
         var SEOKeywords = $("#SEOKeywords").val();
         $.ajax({
             //url: '/BDS_TinTuc/_PartialIndex',
-            url: '@Url.Action("_PartialIndex", "Categories", new { area = "Cpanel" })',
+            url: '@Url.Action("_PartialIndex", "Categories")',
             data: {
                 pageSize: parseInt($('#ddlPageSize').val()),
                 TenChungLoai: TenChungLoai,

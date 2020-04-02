@@ -12,6 +12,7 @@ namespace NoiThatAdmin.Models.DataModels
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Category()
         {
+            Blogs = new HashSet<Blog>();
             Products = new HashSet<Product>();
             Products1 = new HashSet<Product>();
         }
@@ -29,6 +30,8 @@ namespace NoiThatAdmin.Models.DataModels
 
         public int? Sort { get; set; }
 
+        public int? TypeCate { get; set; }
+
         [StringLength(200)]
         public string SEOTitle { get; set; }
 
@@ -39,6 +42,9 @@ namespace NoiThatAdmin.Models.DataModels
         public string SEOKeywords { get; set; }
 
         public string SEOMetadescription { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Blog> Blogs { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Products { get; set; }

@@ -58,6 +58,11 @@ namespace NoiThatAdmin.Models.DataModels
                 .IsUnicode(false);
 
             modelBuilder.Entity<Category>()
+                .HasMany(e => e.Blogs)
+                .WithOptional(e => e.Category)
+                .HasForeignKey(e => e.CatetoryID);
+
+            modelBuilder.Entity<Category>()
                 .HasMany(e => e.Products)
                 .WithOptional(e => e.Category)
                 .HasForeignKey(e => e.CategoryIDParent);

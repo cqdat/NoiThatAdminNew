@@ -33,6 +33,8 @@ namespace NoiThatAdmin
                       "~/assets/plugins/easypiechart/jquery.easypiechart.min.js",
                       "~/assets/plugins/sparklines/jquery.sparklines.min.js",
                       "~/assets/plugins/form-toggle/toggle.min.js",
+                      "~/assets/plugins/form-nestable/jquery.nestable.min.js",
+                      "~/assets/demo/demo-nestable.js",
                       "~/assets/plugins/fullcalendar/fullcalendar.min.js",
                       "~/assets/plugins/form-daterangepicker/daterangepicker.min.js",
                       "~/assets/plugins/form-daterangepicker/moment.min.js",

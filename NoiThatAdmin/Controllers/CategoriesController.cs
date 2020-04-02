@@ -20,7 +20,7 @@ namespace NoiThatAdmin.Controllers
         // GET: Categories
         public ActionResult Index()
         {
-            ViewData["ListCate"] = db.Categories.ToList();
+            ViewData["ListCate"] = db.Categories.Where(c => c.TypeCate == WebConstants.CategoryProduct).ToList();
             return View();
         }
 
@@ -34,11 +34,11 @@ namespace NoiThatAdmin.Controllers
 
             if (pageSize == -1)
             {
-                pageSize = db.Categories.ToList().Count;
+                pageSize = db.Categories.Where(c => c.TypeCate == WebConstants.CategoryProduct).ToList().Count;
             }
             ViewBag.PageSize = pageSize;
 
-            var lstCates = db.Categories.ToList();
+            var lstCates = db.Categories.Where(c => c.TypeCate == WebConstants.CategoryProduct).ToList();
             if (!string.IsNullOrEmpty(TenChungLoai))
             {
                 lstCates = lstCates.Where(s => s.CategoryName.ToUpper().Contains(TenChungLoai.ToUpper())).ToList();
@@ -85,7 +85,7 @@ namespace NoiThatAdmin.Controllers
         // GET: Categories/Create
         public ActionResult Create()
         {
-            ViewData["ListCate"] = db.Categories.ToList();
+            ViewData["ListCate"] = db.Categories.Where(c => c.TypeCate == WebConstants.CategoryProduct && c.Parent == 0).ToList();
             return View();
         }
 
@@ -94,10 +94,11 @@ namespace NoiThatAdmin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CategoryID,CategoryName,Parent,DisplayMenu,IsActive,Sort,SEOTitle,SEOUrlRewrite,SEOKeywords,SEOMetadescription")] Category category)
+        public ActionResult Create([Bind(Include = "CategoryID,CategoryName,Parent,DisplayMenu,IsActive,Sort,TypeCate,SEOTitle,SEOUrlRewrite,SEOKeywords,SEOMetadescription")] Category category)
         {
             if (ModelState.IsValid)
             {
+                category.TypeCate = WebConstants.CategoryProduct;
                 category.SEOUrlRewrite = Helpers.ConvertToUpperLower(category.CategoryName);
                 db.Categories.Add(category);
                 db.SaveChanges();
@@ -121,7 +122,7 @@ namespace NoiThatAdmin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewData["ListCate"] = db.Categories.ToList();
+            ViewData["ListCate"] = db.Categories.Where(c => c.TypeCate == WebConstants.CategoryProduct && c.Parent == 0).ToList();
             return View(category);
         }
 
@@ -134,6 +135,7 @@ namespace NoiThatAdmin.Controllers
         {
             if (ModelState.IsValid)
             {
+                category.TypeCate = WebConstants.CategoryProduct;
                 category.SEOUrlRewrite = Helpers.ConvertToUpperLower(category.CategoryName);
                 db.Entry(category).State = EntityState.Modified;
                 db.SaveChanges();
