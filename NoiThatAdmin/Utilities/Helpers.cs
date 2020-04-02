@@ -91,7 +91,7 @@ namespace NoiThatAdmin.Utilities
         {
             hpass = GetMD5Hash(hpass);
 
-            var user = db.Users.FirstOrDefault(q => q.UserName == uname && q.HashPass == hpass);
+            var user = db.Users.FirstOrDefault(q => q.UserName == uname && q.HashPass == hpass && q.Active == true);
 
             if (user != null)
             {
@@ -113,6 +113,34 @@ namespace NoiThatAdmin.Utilities
                 sBuilder.Append(data[i].ToString("x2"));
             }
             return sBuilder.ToString();
+        }
+
+        public int GetUserID(string name)
+        {
+            var u = db.Users.FirstOrDefault(q => q.UserName == name);
+
+            if(u == null)
+            {
+                return 1;
+            }
+            else
+            {
+                return u.UserID;
+            }
+        }
+
+        public string GetPermissionInRole(int? roleid)
+        {
+            var x = db.PermissionRoles.Where(q => q.RoleID == roleid);
+
+            string data = "";
+
+            foreach(var q in x)
+            {
+                data += q.Permission.PermissionName + ", ";
+            }
+
+            return data.Substring(0, data.Length - 2);
         }
 
     }

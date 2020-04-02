@@ -1,0 +1,61 @@
+﻿@model NoiThatAdmin.Models.UserRoleViewModel
+
+    <div class="row">
+        <div class="col-md-6">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>
+                            Đang Có
+                        </th>
+                        <th>
+                            #
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var q in Model.Allow)
+                    {
+                        <tr>
+                            <td>
+                                @q.RoleName
+                            </td>
+                            <td>
+                                <a href="javascript:" roleid="@q.RoleID" class="btn btn-xs btn-danger DeleteRole">Xóa</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-6">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        Chưa Có
+                    </th>
+                    <th>
+                        #
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var q in Model.Available)
+                {
+                    <tr>
+                        <td>
+                            @q.RoleName
+                        </td>
+                        <td>
+                            <a href="javascript:" roleid="@q.RoleID" class="btn btn-xs btn-success AddRole">Thêm</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
+

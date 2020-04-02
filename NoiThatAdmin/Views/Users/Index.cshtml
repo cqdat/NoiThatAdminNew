@@ -1,7 +1,9 @@
-﻿@model IEnumerable<NoiThatAdmin.Models.DataModels.User>
+﻿@model NoiThatAdmin.Models.UserViewModel
+@using NoiThatAdmin.Utilities
 
 @{
     ViewBag.Title = "Danh sách tài khoản";
+    Helpers h = new Helpers();
 }
 
 <div id="page-heading">
@@ -18,52 +20,133 @@
         </div>
     </div>
 </div>
+
 <div class="container">
     <div class="col-md-12">
-
-        <table class="table table-bordered table-flipscroll">
-            <tr>
-                <th>
-                    Tài khoản
-                </th>
-                <th>
-                    Tình trạng
-                </th>
-                <th>
-                    Tạo lúc
-                </th>
-                <th></th>
-            </tr>
-
-            @foreach (var item in Model)
-            {
+        <div class="listuser">
+            <table class="table table-bordered table-flipscroll">
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.UserName)
-                    </td>
-                    <td>
-                        @if (item.Active == true)
-                        {
-                            <span class="badge badge-success">Mở</span>
-                        }
-                        else
-                        {
-                            <span class="badge badge-danger">Khóa</span>
-                        }
-                    </td>
-                    <td>
-                        @Convert.ToDateTime(item.Created).ToString("HH:mm dd/MM/yyyy")
-                    </td>
-                    <td>
-                        @Html.ActionLink("Sửa", "Edit", new { id = item.UserID }) |
-                        <a href="javascript:" data-toggle="modal" data-target="#SetRole" data-backdrop="static" data-keyboard="false">Phân Quyền</a>
-                    </td>
+                    <th>
+                        Tài khoản
+                    </th>
+                    <th>
+                        Tình trạng
+                    </th>
+                    <th>
+                        Tạo lúc
+                    </th>
+                    <th></th>
                 </tr>
-            }
 
-        </table>
+                @foreach (var item in Model.users)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserName)
+                        </td>
+                        <td>
+                            @if (item.Active == true)
+                            {
+                                <span class="badge badge-success">Mở</span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-danger">Khóa</span>
+                            }
+                        </td>
+                        <td>
+                            @Convert.ToDateTime(item.Created).ToString("HH:mm dd/MM/yyyy")
+                        </td>
+                        <td>
+                            @Html.ActionLink("Sửa", "Edit", new { id = item.UserID }) |
+                            <a href="javascript:" data-toggle="modal" data-target="#SetRole" data-backdrop="static" data-keyboard="false" userid="@item.UserID" class="UpdateRoleUser">Phân Quyền</a>
+                        </td>
+                    </tr>
+                }
 
+            </table>
+        </div>
     </div>
+
+    <div class="col-md-6">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Nhóm quyền</h3>
+            </div>
+            <div class="panel-body">
+                <p>
+                    <input type="button" class="btn btn-sm btn-primary" value="Thêm" data-toggle="modal" data-target="#AddRole"/>
+                </p>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>
+                                Nhóm quyền
+                            </th>
+                            <th>
+                                Quyền
+                            </th>
+                            <th>
+                                #
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var q in Model.roles)
+                        {
+                            <tr>
+                                <td>
+                                    @q.RoleName
+                                </td>
+                                <td class="viewpermission">
+                                    @h.GetPermissionInRole(q.RoleID)
+                                </td>
+                                <td>
+                                    <a href="javascript:" class="btn btn-xs btn-success updaterole" roleid="@q.RoleID">Sửa quyền</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Danh sách quyền</h3>
+            </div>
+            <div class="panel-body">                
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>
+                                Tên
+                            </th>       
+                            <th>
+                                Mã
+                            </th>                           
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var q in Model.permissions)
+                        {
+                            <tr>
+                                <td>
+                                    @q.PermissionName
+                                </td>
+                                <td>
+                                    @q.PermissionCode
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 
@@ -75,23 +158,25 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="AddUserlbl">Thêm mới</h4>
             </div>
-            <div class="modal-body">
-                <div>
-                    <div class="form-group">
-                        <label for="txtUserName">Tài Khoản</label>
-                        <input type="text" class="form-control" id="txtUserName" placeholder="username">
-                    </div>
+            <form method="post" action="~/users/adduser">
+                <div class="modal-body">
+                    <div>
+                        <div class="form-group">
+                            <label for="txtUserName">Tài Khoản</label>
+                            <input type="text" class="form-control" id="txtUserName" name="uname" placeholder="username">
+                        </div>
 
-                    <div class="form-group">
-                        <label for="txtPassword">Mật Khẩu</label>
-                        <input type="text" class="form-control" id="txtPassword" placeholder="password">
+                        <div class="form-group">
+                            <label for="txtPassword">Mật Khẩu</label>
+                            <input type="password" class="form-control" id="txtPassword" name="pword" placeholder="password">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-                <button type="button" class="btn btn-primary">Lưu</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                    <button type="submit" class="btn btn-primary">Lưu</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -105,7 +190,57 @@
                 <h4 class="modal-title" id="SetRole">Phân Quyền</h4>
             </div>
             <div class="modal-body">
-                ...
+                <input type="hidden" id="hdUserID" />
+                <div class="listuserrole">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="AddRole" tabindex="-1" role="dialog" aria-labelledby="AddRole">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="AddRolelbl">Thêm nhóm quyền</h4>
+            </div>
+            <form method="post" action="~/users/addrole">
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="txtRoleName">Tên nhóm</label>
+                        <input type="text" class="form-control" id="txtRoleName" placeholder="name" name="name">
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="UpdateRole" tabindex="-1" role="dialog" aria-labelledby="UpdateRole">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="UpdateRole">Cập Nhập</h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="hdRoleID"/>
+                <div id="listupdaterole">
+
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>

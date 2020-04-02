@@ -259,3 +259,14 @@
     .dd3-handle:hover {
         background: #ddd;
     }
+.listuser
+{
+    height:333px;
+    overflow-y:scroll;
+    margin-bottom:12px;
+}
+td.viewpermission
+{
+    color:#f00;
+    font-weight:bold;
+}

@@ -209,6 +209,7 @@
     <Compile Include="Models\DataModels\Slide.cs" />
     <Compile Include="Models\DataModels\TanThoiEntities.cs" />
     <Compile Include="Models\DataModels\User.cs" />
+    <Compile Include="Models\DataViewModel.cs" />
     <Compile Include="Models\FilesHelper.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ImageHandler.cs" />
@@ -507,6 +508,7 @@
     <Content Include="Scripts\blueimp-gallery2\js\blueimp-helper.min.js.map" />
     <Content Include="Scripts\blueimp-gallery2\js\jquery.blueimp-gallery.min.js.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\client.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -599,6 +601,9 @@
     <Content Include="Views\BlogCategories\Create.cshtml" />
     <Content Include="Views\BlogCategories\Edit.cshtml" />
     <Content Include="Views\BlogCategories\Details.cshtml" />
+    <Content Include="Views\Users\Role.cshtml" />
+    <Content Include="Views\Users\_updaterole.cshtml" />
+    <Content Include="Views\Users\_roleuser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
