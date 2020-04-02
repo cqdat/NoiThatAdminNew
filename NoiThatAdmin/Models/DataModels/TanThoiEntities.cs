@@ -34,6 +34,9 @@ namespace NoiThatAdmin.Models.DataModels
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            Database.SetInitializer<TanThoiEntities>(null);
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Advertise>()
                 .Property(e => e.AdvertiseImage)
                 .IsUnicode(false);
