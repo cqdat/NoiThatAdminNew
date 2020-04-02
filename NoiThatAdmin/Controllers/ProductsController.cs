@@ -49,7 +49,7 @@ namespace NoiThatAdmin.Controllers
             {
                 lstprod = lstprod.Where(s => s.ProductCode.ToUpper().Contains(MaSP.ToUpper())).ToList();
             }
-            ViewBag.SanPham = SanPham;
+            ViewBag.MaSP = MaSP;
 
             if (!string.IsNullOrEmpty(SanPham))
             {
@@ -67,7 +67,7 @@ namespace NoiThatAdmin.Controllers
             {
                 lstprod = lstprod.Where(s => s.CategoryID == DanhMucCon).ToList();
             }
-            ViewBag.DanhMucCha = DanhMucCha;
+            ViewBag.DanhMucCon = DanhMucCon;
 
             if (!string.IsNullOrEmpty(SEOKeywords))
             {

@@ -1,0 +1,98 @@
+﻿@model NoiThatAdmin.Models.DataModels.Blog
+@using NoiThatAdmin.Utilities
+@{
+    ViewBag.Title = "Details";
+}
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="index.html">Trang chủ</a></li>
+        <li><a href="/Blogs/Index">Danh sách Bài viết</a></li>
+        <li class="active">Chi tiết bài viết</li>
+    </ol>
+
+    <h1>Chi tiết</h1>
+    <div class="options">
+        <div class="btn-toolbar">
+            <a href="/Blogs/Edit/@Model.BlogID" class="btn btn-success btn-label"><i class="fa fa-edit"></i>Sửa</a>
+            <a href="/Blogs/Index" class="btn btn-primary">Quay Lại</a>
+        </div>
+    </div>
+</div>
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tab-container tab-success">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#home1" data-toggle="tab">Thông tin</a></li>
+                    <li class=""><a href="#home2" data-toggle="tab">Chi tiết Bài Viết</a></li>
+                </ul>
+                <div class="tab-content" style="background-color:#ffffff">
+                    <div class="tab-pane clearfix active" id="home1">
+                        <div class="panel-body">
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <img src="@WebConstants.imgNewsURLShow/@Model.ImageURL" alt="" class="pull-left" style="margin: 0 20px 20px 0; width:100px">
+                                    <div class="table-responsive">
+                                        <h3><strong>@Model.BlogName</strong></h3>
+                                        <table class="table table-condensed">
+
+                                            <tbody>
+                                                <tr>
+                                                    <td>Danh mục</td>
+                                                    <td><a href="#">@Model.Category.CategoryName</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Ẩn/Hiện</td>
+                                                    <td>
+                                                        @if (Model.IsActive == true)
+                                                        {
+                                                            <span class="badge badge-success">Đang hiện thị</span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span class="badge">Ẩn</span>
+                                                        }
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Lần cập nhật cuối</td>
+                                                    <td>@Convert.ToDateTime(Model.Created).ToString(WebConstants.DatetimeFormatVI)</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Bởi</td>
+                                                    <td>@Model.User.UserName</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Lượt Xem</td>
+                                                    <td>@Model.CountView</td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h3>Mô tả ngắn</h3>
+                                    <p>
+                                        @Model.Descript
+                                    </p>
+                                    <p><strong>SEO Tiêu đề: </strong>@Model.SEOTitle</p>
+                                    <p><strong>SEO URL thân thiện: </strong>@Model.SEOUrlRewrite</p>
+                                    <p><strong>SEO Keywords: </strong>@Model.SEOKeywords</p>
+                                    <p><strong>SEO Metadescription: </strong>@Model.SEOMetadescription</p>
+                                </div>
+                            </div>
+                            <hr>
+                            
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="home2">
+                        @Html.Raw(Model.Content)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

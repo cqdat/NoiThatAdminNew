@@ -20,6 +20,9 @@ namespace NoiThatAdmin.Models.DataModels
         [StringLength(200)]
         public string BlogName { get; set; }
 
+        [StringLength(200)]
+        public string ImageURL { get; set; }
+
         [StringLength(400)]
         public string Descript { get; set; }
 
@@ -34,8 +37,21 @@ namespace NoiThatAdmin.Models.DataModels
         public int? CatetoryID { get; set; }
 
         public DateTime? Created { get; set; }
+        public DateTime? LastModify { get; set; }
 
         public int? CreatedBy { get; set; }
+
+        [StringLength(200)]
+        public string SEOTitle { get; set; }
+
+        [StringLength(200)]
+        public string SEOUrlRewrite { get; set; }
+
+        [StringLength(200)]
+        public string SEOKeywords { get; set; }
+
+        [StringLength(500)]
+        public string SEOMetadescription { get; set; }
 
         public virtual User User { get; set; }
 

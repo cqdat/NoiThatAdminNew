@@ -2,7 +2,7 @@
 @using PagedList.Mvc;
 @using NoiThatAdmin.Models.DataModels
 @using NoiThatAdmin.Utilities;
-@model IPagedList<NoiThatAdmin.Models.DataModels.Product>
+@model IPagedList<NoiThatAdmin.Models.DataModels.Blog>
 @{
     int stt = ViewBag.STT;
     Helpers h = new Helpers();
@@ -16,18 +16,34 @@
             <table>
                 <thead>
                     <tr>
-                        
-                        <th style="width:30px">STT</th>
-                        <th>Mã Sản phẩm</th>
-                        <th style="width:200px">Tên Sản phẩm</th>
-                        <th>Danh Mục Cấp 1</th>
-                        <th>Danh Mục Cấp 2</th>
-                        <th>Hình đại diện</th>
-                        <th style="width:60px">Sản phẩm<br /> mới</th>
-                        <th style="width:60px">Hiện thị<br />Website</th>
-                        <th style="width:60px">Lượt <br /> Xem</th>
-                        <th>Tạo lúc</th>
-                        <th>SEO Keywords</th>
+                        <th style="width:100px">
+                            Loại
+                        </th>
+
+                        <th style="width:300px">
+                            Tiêu đề
+                        </th>
+                        <th>
+                            Hình Ảnh
+                        </th>
+
+                        <th style="width:70px">
+                            Lượt view
+                        </th>
+                        <th style="width:70px">
+                            Hiện/Ẩn
+                        </th>
+                        <th>
+                            Tạo lúc
+                        </th>
+                        <th>
+                            Bởi
+                        </th>
+
+                        <th>
+                            Từ khóa
+                        </th>
+
                         <th></th>
                     </tr>
 
@@ -39,41 +55,22 @@
                     @foreach (var item in Model)
                     {
                     <tr>
-                        
-                        <td style="width:30px">@stt</td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ProductCode)
-                        </td>
-                        <td style="width:200px">
-                            @Html.DisplayFor(modelItem => item.ProductName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Category.CategoryName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Category1.CategoryName)
+                        <td style="width:100px">
+                            @item.Category.CategoryName
                         </td>
 
-                        
+                        <td style="width:300px">
+                            @item.BlogName
+                        </td>
                         <td>
-                            <img alt="@item.ProductName" style="height:50px" src="@WebConstants.ImgProductShow/@item.Images" />
-                           
+                            <img style="height:30px" src="@WebConstants.imgNewsURLShow/@item.ImageURL" alt="@item.BlogName" title="@item.BlogName" />
                         </td>
-                        
-                        <td style="width:60px">
-                            
-                            @if (item.IsNew == true)
-                            {
-                                <span class="badge badge-danger">SP Mới</span>
-                            }
-                            else
-                            {
-                                <span></span>
-                            }
 
+
+                        <td style="width:70px">
+                            @item.CountView
                         </td>
-                        
-                        <td style="width:60px">
+                        <td style="width:70px">
                             @if (item.IsActive == true)
                             {
                                 <span class="badge badge-success">Hiện thị</span>
@@ -83,22 +80,20 @@
                                 <span class="badge">Ẩn</span>
                             }
                         </td>
-                        <td style="width:60px"> 
-                            @Html.DisplayFor(modelItem => item.CountView)
-                        </td>
                         <td>
                             @Convert.ToDateTime(item.Created).ToString(WebConstants.DateFormatVI)
                         </td>
-                        
-                        
                         <td>
-                            @Html.DisplayFor(modelItem => item.SEOKeywords)
+                            @item.User.UserName
                         </td>
-                       
                         <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })
+                            @item.SEOKeywords
+                        </td>
+
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.BlogID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.BlogID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.BlogID })
                         </td>
                     </tr>
                     }
