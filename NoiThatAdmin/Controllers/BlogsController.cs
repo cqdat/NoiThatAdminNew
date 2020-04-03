@@ -50,7 +50,7 @@ namespace NoiThatAdmin.Controllers
 
             if (!string.IsNullOrEmpty(DanhMuc.ToString()))
             {
-                lstprod = lstprod.Where(s => s.CatetoryID == DanhMuc).ToList();
+                lstprod = lstprod.Where(s => s.CategoryID == DanhMuc).ToList();
             }
             ViewBag.DanhMuc = DanhMuc;
 
@@ -148,7 +148,7 @@ namespace NoiThatAdmin.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CatetoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", blog.CatetoryID);
+            ViewBag.CatetoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", blog.CategoryID);
             ViewBag.CreatedBy = new SelectList(db.Users, "UserID", "UserName", blog.CreatedBy);
             return View(blog);
         }
@@ -165,7 +165,7 @@ namespace NoiThatAdmin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CatetoryID = new SelectList(db.Categories.Where(c => c.TypeCate == WebConstants.CategoryNews), "CategoryID", "CategoryName", blog.CatetoryID);
+            ViewBag.CatetoryID = new SelectList(db.Categories.Where(c => c.TypeCate == WebConstants.CategoryNews), "CategoryID", "CategoryName", blog.CategoryID);
             ViewBag.CreatedBy = new SelectList(db.Users, "UserID", "UserName", blog.CreatedBy);
             return View(blog);
         }
@@ -233,7 +233,7 @@ namespace NoiThatAdmin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CatetoryID = new SelectList(db.Categories.Where(c => c.TypeCate == WebConstants.CategoryNews), "CategoryID", "CategoryName", blog.CatetoryID);
+            ViewBag.CatetoryID = new SelectList(db.Categories.Where(c => c.TypeCate == WebConstants.CategoryNews), "CategoryID", "CategoryName", blog.CategoryID);
             ViewBag.CreatedBy = new SelectList(db.Users, "UserID", "UserName", blog.CreatedBy);
             return View(blog);
         }

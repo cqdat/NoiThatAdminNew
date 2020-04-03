@@ -42,6 +42,10 @@ namespace NoiThatAdmin.Models.DataModels
                 .Property(e => e.AdvertiseURL)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<Blog>()
+                .Property(e => e.SEOUrlRewrite)
+                .IsUnicode(false);
+
             modelBuilder.Entity<BlogComment>()
                 .Property(e => e.Images)
                 .IsUnicode(false);
@@ -53,11 +57,6 @@ namespace NoiThatAdmin.Models.DataModels
             modelBuilder.Entity<Category>()
                 .Property(e => e.SEOUrlRewrite)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<Category>()
-                .HasMany(e => e.Blogs)
-                .WithOptional(e => e.Category)
-                .HasForeignKey(e => e.CatetoryID);
 
             modelBuilder.Entity<Category>()
                 .HasMany(e => e.Products)
