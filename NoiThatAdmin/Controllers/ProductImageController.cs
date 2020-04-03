@@ -35,9 +35,9 @@ namespace NoiThatAdmin.Controllers
         }
 
         [HttpPost]
-        public JsonResult Upload()
+        public JsonResult Upload(int? productid)
         {
-            int productid = 1;
+            //productid = 1;
 
             var resultList = new List<ViewDataUploadFilesResult>();
 

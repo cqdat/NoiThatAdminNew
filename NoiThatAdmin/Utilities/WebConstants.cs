@@ -11,7 +11,7 @@ namespace NoiThatAdmin.Utilities
         public static string ImgProduct = ConfigurationManager.AppSettings["ImagesBasePath"];
         public static string ImgProductThumbs = "~/Photos/Products/_thumbs";
 
-        public static string ImgProductShow = "/Photos/Products";
+        public static string ImgProductShow = "~/Photos/Products";
         public static string ImgProductThumbsShow = "Photos/Products/_thumbs";
 
         public static string imgNewsURL = "~/Photos/News";
