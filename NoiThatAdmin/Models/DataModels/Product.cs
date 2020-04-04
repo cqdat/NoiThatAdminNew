@@ -60,6 +60,7 @@ namespace NoiThatAdmin.Models.DataModels
         public bool? IsActive { get; set; }
 
         public int? CountView { get; set; }
+        public bool? IsProduct { get; set; }
 
         public DateTime? Created { get; set; }
 

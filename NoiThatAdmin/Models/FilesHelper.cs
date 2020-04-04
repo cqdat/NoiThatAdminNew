@@ -63,7 +63,7 @@ namespace NoiThatAdmin.Models
             System.Diagnostics.Debug.WriteLine(fullPath);
             System.Diagnostics.Debug.WriteLine(System.IO.File.Exists(fullPath));
             string thumbPath = "/" + file.Remove(file.Length - 4, 4) + ".80x80.jpg";
-            string partThumb1 = Path.Combine(StorageRoot, "thumbs");
+            string partThumb1 = Path.Combine(StorageRoot, "_thumbs");
             string partThumb2 = Path.Combine(partThumb1, file.Remove(file.Length - 4, 4) + ".80x80.jpg");
 
             System.Diagnostics.Debug.WriteLine(partThumb2);
@@ -125,7 +125,7 @@ namespace NoiThatAdmin.Models
             string fullPath = Path.Combine(StorageRoot);
             Directory.CreateDirectory(fullPath);
             // Create new folder for thumbs
-            Directory.CreateDirectory(fullPath + "/thumbs/");
+            Directory.CreateDirectory(fullPath + "/_thumbs/");
 
             foreach (string inputTagName in httpRequest.Files)
             {
@@ -176,7 +176,7 @@ namespace NoiThatAdmin.Models
                     }
                     else
                     {
-                        var ThumbfullPath = Path.Combine(pathOnServer, "thumbs");
+                        var ThumbfullPath = Path.Combine(pathOnServer, "_thumbs");
                         fileThumb = guid + "_" + file.FileName.Remove(file.FileName.Length - 4, 4) + ".80x80.jpg";
                         var ThumbfullPath2 = Path.Combine(ThumbfullPath, fileThumb);
                         using (MemoryStream stream = new MemoryStream(System.IO.File.ReadAllBytes(fullPath)))
@@ -193,7 +193,7 @@ namespace NoiThatAdmin.Models
                 img.Created = DateTime.Now;
                 img.ImagesThumb = fileThumb;
                 img.ProductID = productid;
-                img.Title = file.FileName;
+                img.Title = file.FileName.Substring(0, file.FileName.Length - 4);
                 img.URLImage = guid + "_" + file.FileName;
                 db.ProductImages.Add(img);
                 db.SaveChanges();              
@@ -236,7 +236,7 @@ namespace NoiThatAdmin.Models
             img.Created = DateTime.Now;
             img.ImagesThumb = file.FileName;
             img.ProductID = productid;
-            img.Title = file.FileName;
+            img.Title = file.FileName.Substring(0, file.FileName.Length - 4);
             img.URLImage = file.FileName + ".80x80.jpg";
             db.ProductImages.Add(img);
             db.SaveChanges();
@@ -272,7 +272,7 @@ namespace NoiThatAdmin.Models
             string extansion = type;//splited[1];
             if (extansion.Equals("jpeg") || extansion.Equals("jpg") || extansion.Equals("png") || extansion.Equals("gif"))
             {
-                string thumbnailUrl = UrlBase + "/thumbs/" + FileName.Remove(FileName.Length - 4, 4) + ".80x80.jpg";
+                string thumbnailUrl = UrlBase + "/_thumbs/" + FileName.Remove(FileName.Length - 4, 4) + ".80x80.jpg";
                 return thumbnailUrl;
             }
             else
@@ -310,7 +310,7 @@ namespace NoiThatAdmin.Models
                 string extansion = splited[1];
                 if (extansion.Equals("jpeg") || extansion.Equals("jpg") || extansion.Equals("png") || extansion.Equals("gif"))
                 {
-                    string thumbnailUrl = UrlBase + "/thumbs/" + FileName + ".80x80.jpg";
+                    string thumbnailUrl = UrlBase + "/_thumbs/" + FileName + ".80x80.jpg";
                     return thumbnailUrl;
                 }
                 else
@@ -330,7 +330,7 @@ namespace NoiThatAdmin.Models
             }
             else
             {
-                return UrlBase + "/thumbs/" + FileName + ".80x80.jpg";
+                return UrlBase + "/_thumbs/" + FileName + ".80x80.jpg";
             }
 
         }

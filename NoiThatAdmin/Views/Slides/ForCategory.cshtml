@@ -1,0 +1,80 @@
+﻿@model IEnumerable<NoiThatAdmin.Models.DataModels.Slide>
+@using NoiThatAdmin.Utilities
+@{
+    ViewBag.Title = "Hình Ảnh";
+}
+
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="/">Trang chủ</a></li>
+        <li class="active">Slide loại sản phẩm</li>
+
+    </ol>
+
+    <h1>DS Slide Hình Ảnh Theo Loại Sản Phẩm</h1>
+    <div class="options">
+        <div class="btn-toolbar">
+            <a href="javascript:" class="btn btn-success btn-label"><i class="fa fa-plus"></i>Thêm mới</a>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="col-md-12">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        Hình Ảnh
+                    </th>
+                    <th>
+                        Slogan 1
+                    </th>
+                    <th>
+                        Slogan 2
+                    </th>
+                    <th>
+                        Tiêu đề
+                    </th>
+                    <th>
+                        Đường dẫn
+                    </th>
+                    <th>
+                        Category
+                    </th>
+                    <th>
+                        #
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var q in Model)
+                {
+                    <tr>
+                        <td>
+                            <img src="@WebConstants.ImgProductThumbsShow/@q.ImageURL" />
+                        </td>
+                        <td>
+                            @q.Slogun1
+                        </td>
+                        <td>
+                            @q.Slogun2
+                        </td>
+                        <td>
+                            @q.SlideTitle
+                        </td>
+                        <td>
+                            @q.LinkBanner
+                        </td>
+                        <th>
+                            @q.CategoryID
+                        </th>
+                        <td>
+                            #
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
