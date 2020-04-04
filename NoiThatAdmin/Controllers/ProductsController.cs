@@ -40,11 +40,11 @@ namespace NoiThatAdmin.Controllers
 
             if (pageSize == -1)
             {
-                pageSize = db.Products.ToList().Count;
+                pageSize = db.Products.Where(p=>p.IsProduct == true).ToList().Count;
             }
             ViewBag.PageSize = pageSize;
 
-            var lstprod = db.Products.ToList();
+            var lstprod = db.Products.Where(p => p.IsProduct == true).ToList();
 
             if (!string.IsNullOrEmpty(MaSP))
             {
@@ -160,7 +160,7 @@ namespace NoiThatAdmin.Controllers
                     }
                 }
 
-
+                product.IsProduct = true;
                 product.Price = "0";
                 product.PriceSale = "0";
                 product.SEOUrlRewrite = Helpers.ConvertToUpperLower(product.ProductName);
@@ -257,6 +257,7 @@ namespace NoiThatAdmin.Controllers
                     }
                 }
 
+                product.IsProduct = true;
                 product.Price = product.Price;
                 product.PriceSale = product.PriceSale;
                 product.Created = product.Created;

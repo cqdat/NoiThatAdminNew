@@ -26,6 +26,8 @@ namespace NoiThatAdmin.Models.DataModels
         [StringLength(200)]
         public string ProductName { get; set; }
 
+        public bool? IsProduct { get; set; }
+
         [StringLength(12)]
         public string Price { get; set; }
 
