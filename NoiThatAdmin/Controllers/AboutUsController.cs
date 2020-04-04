@@ -12,7 +12,7 @@ using PagedList;
 
 namespace NoiThatAdmin.Controllers
 {
-    public class AboutUsController : Controller
+    public class AboutUsController : BaseController
     {
         private TanThoiEntities db = new TanThoiEntities();
         // GET: AboutUs
@@ -36,7 +36,7 @@ namespace NoiThatAdmin.Controllers
             }
             ViewBag.PageSize = pageSize;
 
-            var lstprod = db.Blogs.Where(b => b.TypeBlog == WebConstants.BlogAboutUs).ToList();
+            var lstprod = db.Blogs.Where(b => b.TypeBlog == WebConstants.BlogAboutUs).OrderBy(b=>b.Sort).ToList();
 
 
 
@@ -134,14 +134,15 @@ namespace NoiThatAdmin.Controllers
                 blog.CountView = 1;
                 db.Blogs.Add(blog);
                 db.SaveChanges();
-                return RedirectToAction("Index");            }
+                return RedirectToAction("Index");
+            }
 
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", blog.CategoryID);
             ViewBag.CreatedBy = new SelectList(db.Users, "UserID", "UserName", blog.CreatedBy);
             return View(blog);
         }
 
-
+        [Authorize]
         // GET: Blogs/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -162,21 +163,23 @@ namespace NoiThatAdmin.Controllers
         // POST: Blogs/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Edit([Bind(Include = "BlogID,BlogName,ImageURL,Descript,Content,TypeBlog,Sort,CountView,IsActive,CategoryID,Created,CreatedBy,SEOTitle,SEOUrlRewrite,SEOKeywords,SEOMetadescription")] Blog blog,
-            HttpPostedFileBase HinhAnh)
+        public ActionResult Edit([Bind(Include = "BlogID,BlogName,ImageURL,Content,Sort,CountView,IsActive,CategoryID,SEOTitle,SEOUrlRewrite,SEOKeywords,SEOMetadescription")] Blog blog, HttpPostedFileBase HinhAnh)
         {
+            
             if (ModelState.IsValid)
             {
+                
                 var allowedExtensions = new[] {
             ".Jpg", ".png", ".jpg", "jpeg"
                 };
 
                 if (HinhAnh == null)
                 {
-                    blog.ImageURL = blog.ImageURL;
+                    blog.ImageURL = "NoImage.png";
                 }
                 else
                 {
@@ -211,15 +214,16 @@ namespace NoiThatAdmin.Controllers
                         ViewBag.message = "Please choose only Image file";
                     }
                 }
-
+                blog.TypeBlog = WebConstants.BlogAboutUs;
                 blog.SEOUrlRewrite = Helpers.ConvertToUpperLower(blog.BlogName);
-                blog.TypeBlog = blog.TypeBlog;
+                
                 blog.CreatedBy = db.Users.FirstOrDefault(q => q.UserName == User.Identity.Name).UserID;
-                blog.Created = blog.Created;
+                blog.Created = DateTime.Now;
                 blog.LastModify = DateTime.Now;
 
                 db.Entry(blog).State = EntityState.Modified;
                 db.SaveChanges();
+                Success(string.Format("Chỉnh sửa thông tin <b>{0}</b> thành công.", ""), true);
                 return RedirectToAction("Index");
             }
             ViewBag.CategoryID = new SelectList(db.Categories.Where(c => c.TypeCate == WebConstants.CategoryAboutUs), "CategoryID", "CategoryName", blog.CategoryID);

@@ -13,7 +13,7 @@ using PagedList;
 
 namespace NoiThatAdmin.Controllers
 {
-    public class BlogsController : Controller
+    public class BlogsController : BaseController
     {
         private TanThoiEntities db = new TanThoiEntities();
 
@@ -153,6 +153,7 @@ namespace NoiThatAdmin.Controllers
             return View(blog);
         }
 
+        [Authorize]
         // GET: Blogs/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -222,7 +223,7 @@ namespace NoiThatAdmin.Controllers
                         ViewBag.message = "Please choose only Image file";
                     }
                 }
-
+                
                 blog.SEOUrlRewrite = Helpers.ConvertToUpperLower(blog.BlogName);
                 blog.TypeBlog = blog.TypeBlog;
                 blog.CreatedBy = db.Users.FirstOrDefault(q => q.UserName == User.Identity.Name).UserID;
@@ -231,7 +232,8 @@ namespace NoiThatAdmin.Controllers
 
                 db.Entry(blog).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                Success(string.Format("Chỉnh sửa thông tin <b>{0}</b> thành công.", ""), true);
+                return RedirectToAction("Index","AboutUs");
             }
             ViewBag.CategoryID = new SelectList(db.Categories.Where(c => c.TypeCate == WebConstants.CategoryNews), "CategoryID", "CategoryName", blog.CategoryID);
             ViewBag.CreatedBy = new SelectList(db.Users, "UserID", "UserName", blog.CreatedBy);

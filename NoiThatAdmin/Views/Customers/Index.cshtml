@@ -1,0 +1,74 @@
+﻿@model IEnumerable<NoiThatAdmin.Models.DataModels.Customer>
+@using NoiThatAdmin.Utilities
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="index.html">Trang chủ</a></li>
+        <li class="active">Danh sách Thương hiệu Khách hàng</li>
+
+    </ol>
+
+    <h1>Danh sách Khách hàng</h1>
+    <div class="options">
+        <div class="btn-toolbar">
+
+            <a href="/Customers/Create/" class="btn btn-success btn-label"><i class="fa fa-plus"></i>Thêm mới</a>
+        </div>
+    </div>
+</div>
+
+<div class="container" style="background-color:#ffffff">
+    @{ Html.RenderPartial("_Alerts"); }
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                Tên KH
+            </th>
+            <th>
+                Logo
+            </th>
+            <th>
+                Mô tả ngắn
+            </th>
+            <th>
+                Ẩn/Hiện
+            </th>
+            <th>
+                Tạo lúc
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerName)
+                </td>
+                <td>
+                    <img src="@WebConstants.imgLogoCustShow" style="height:70px" alt="@item.CustomerName" title="@item.CustomerName" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerContent)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsActive)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Created)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.CustomerID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.CustomerID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.CustomerID })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+    
