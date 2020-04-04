@@ -233,7 +233,7 @@ namespace NoiThatAdmin.Controllers
                 db.Entry(blog).State = EntityState.Modified;
                 db.SaveChanges();
                 Success(string.Format("Chỉnh sửa thông tin <b>{0}</b> thành công.", ""), true);
-                return RedirectToAction("Index","AboutUs");
+                return RedirectToAction("Index","Blogs");
             }
             ViewBag.CategoryID = new SelectList(db.Categories.Where(c => c.TypeCate == WebConstants.CategoryNews), "CategoryID", "CategoryName", blog.CategoryID);
             ViewBag.CreatedBy = new SelectList(db.Users, "UserID", "UserName", blog.CreatedBy);
