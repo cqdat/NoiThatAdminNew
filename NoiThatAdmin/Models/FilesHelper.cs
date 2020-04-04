@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NoiThatAdmin.Models.DataModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Web.Hosting;
 
 namespace NoiThatAdmin.Models
 {
+
     public class FilesHelper
     {
         string DeleteURL = null;
@@ -19,6 +21,8 @@ namespace NoiThatAdmin.Models
         string serverMapPath = null;
 
         //DataEntity db = new DataEntity();
+
+        TanThoiEntities db = new TanThoiEntities();
 
         public FilesHelper(string DeleteURL, string DeleteType, string StorageRoot, string UrlBase, string tempPath, string serverMapPath)
         {
@@ -77,6 +81,10 @@ namespace NoiThatAdmin.Models
                 //GalleryDetail g = db.GalleryDetails.Where(q => q.ImageURL.Equals(file)).First();
                 //db.GalleryDetails.Remove(g);
                 //db.SaveChanges();
+
+                var img = db.ProductImages.FirstOrDefault(q => q.URLImage.Equals(file));
+                db.ProductImages.Remove(img);
+                db.SaveChanges();
 
                 string succesMessage = "Ok";
 
@@ -181,22 +189,14 @@ namespace NoiThatAdmin.Models
                     }
                 }
 
-                //img = new GalleryDetail();
-                //img.GalleryID = galleryid;
-                //img.Title = file.FileName;
-                //img.ImageURL = guid + "_" + file.FileName;
-                //img.ImageThumb = fileThumb;
-                //img.Name = file.FileName;
-                //img.UrlBase = fullPath;
-                //img.UrlThumb = URLthumb;
-                //img.Created = DateTime.Now;
-                //db.ImageUploads.Add(img);
-
-                //db.GalleryDetails.Add(img);
-
-                //db.SaveChanges();
-
-
+                ProductImage img = new ProductImage();
+                img.Created = DateTime.Now;
+                img.ImagesThumb = fileThumb;
+                img.ProductID = productid;
+                img.Title = file.FileName;
+                img.URLImage = guid + "_" + file.FileName;
+                db.ProductImages.Add(img);
+                db.SaveChanges();              
 
 
                 statuses.Add(UploadResult(guid + "_" + file.FileName, file.ContentLength, guid + "_" + file.FileName));
@@ -231,6 +231,16 @@ namespace NoiThatAdmin.Models
                 fs.Flush();
                 fs.Close();
             }
+
+            ProductImage img = new ProductImage();
+            img.Created = DateTime.Now;
+            img.ImagesThumb = file.FileName;
+            img.ProductID = productid;
+            img.Title = file.FileName;
+            img.URLImage = file.FileName + ".80x80.jpg";
+            db.ProductImages.Add(img);
+            db.SaveChanges();
+
             statuses.Add(UploadResult(file.FileName, file.ContentLength, file.FileName));
         }
         public ViewDataUploadFilesResult UploadResult(string FileName, int fileSize, string FileFullPath)

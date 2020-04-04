@@ -270,5 +270,29 @@ namespace NoiThatAdmin.Controllers
             return PartialView("_roleuser", model);
         }
 
+        public ActionResult ChangePass(int? userid, string password)
+        {
+            var u = db.Users.Find(userid);
+            u.HashPass = Helpers.GetMD5Hash(password);
+            db.SaveChanges();
+            return Redirect(Request.UrlReferrer.ToString());
+        }
+
+        public JsonResult LockOrUnlockAccount(int? userid, int? xaction)
+        {
+            var u = db.Users.Find(userid);
+            if(xaction == 1)
+            {
+                u.Active = false;
+            }
+            else
+            {
+                u.Active = true;
+            }
+            db.SaveChanges();
+
+            return Json("DONE", JsonRequestBehavior.AllowGet);
+        }
+
     }
 }
