@@ -1,4 +1,5 @@
 ﻿using NoiThatAdmin.Models;
+using NoiThatAdmin.Models.DataModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,8 +10,10 @@ using System.Web.Mvc;
 
 namespace NoiThatAdmin.Controllers
 {
+    
     public class ProductImageController : Controller
     {
+        TanThoiEntities db = new TanThoiEntities();
         FilesHelper h;
         string tempPath = "~/Upload/";
         string serverMapPath = "~/Media/Upload/";
@@ -67,6 +70,13 @@ namespace NoiThatAdmin.Controllers
         {
             h.DeleteFile(file);
             return Json("OK", JsonRequestBehavior.AllowGet);
+        }
+
+        public PartialViewResult GetImageforProduct(int? productid)
+        {
+            var model = db.ProductImages.Where(q => q.ProductID == productid).ToList();
+
+            return PartialView("_image", model);
         }
     }
 }

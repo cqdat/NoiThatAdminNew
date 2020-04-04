@@ -256,5 +256,15 @@
 
     });
 
+    $('#tabHinhAnh').on('shown.bs.tab', function (e) {
+        //var target = $(e.target).attr("href") // activated tab
+        //alert(target);
+
+        var productid = $("#hdProductIDDetail").val().trim();
+
+
+
+    });
+
 
 });
