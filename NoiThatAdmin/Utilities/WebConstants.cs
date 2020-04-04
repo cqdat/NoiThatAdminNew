@@ -17,6 +17,9 @@ namespace NoiThatAdmin.Utilities
         public static string imgNewsURL = "~/Photos/News";
         public static string imgNewsURLShow = "/Photos/News";
 
+        public static string imgLogoCust = "~/Photos/LogosCust";
+        public static string imgLogoCustShow = "/Photos/LogosCust";
+
         public static string DateFormatVI = "dd/MM/yyyy";
         public static string DatetimeFormatVI = "dd/MM/yyyy HH:mm";
 
