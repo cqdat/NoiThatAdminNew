@@ -16,13 +16,14 @@ using PagedList;
 
 namespace NoiThatAdmin.Controllers
 {
-    
+
     public class ProductsController : BaseController
     {
         private TanThoiEntities db = new TanThoiEntities();
 
         // GET: Products
         #region List of product
+        [Authorize]
         public ActionResult Index()
         {
             ViewData["ListCateParent"] = db.Categories.Where(c => c.Parent == 0).ToList();
@@ -89,6 +90,7 @@ namespace NoiThatAdmin.Controllers
 
         // GET: Products/Details/5
         #region Detail of product
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -107,6 +109,7 @@ namespace NoiThatAdmin.Controllers
 
         // GET: Products/Create
         #region Create new product
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.CategoryIDParent = new SelectList(db.Categories.Where(c => c.Parent == 0), "CategoryID", "CategoryName");
@@ -182,6 +185,7 @@ namespace NoiThatAdmin.Controllers
 
         // GET: Products/Edit/5
         #region Edit product
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -202,6 +206,7 @@ namespace NoiThatAdmin.Controllers
         // POST: Products/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
@@ -273,6 +278,7 @@ namespace NoiThatAdmin.Controllers
 
 
         // GET: Products/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -288,6 +294,7 @@ namespace NoiThatAdmin.Controllers
         }
 
         // POST: Products/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

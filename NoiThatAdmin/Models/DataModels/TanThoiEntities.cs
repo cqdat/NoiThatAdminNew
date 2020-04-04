@@ -42,10 +42,6 @@ namespace NoiThatAdmin.Models.DataModels
                 .Property(e => e.AdvertiseURL)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Blog>()
-                .Property(e => e.SEOUrlRewrite)
-                .IsUnicode(false);
-
             modelBuilder.Entity<BlogComment>()
                 .Property(e => e.Images)
                 .IsUnicode(false);
@@ -78,10 +74,6 @@ namespace NoiThatAdmin.Models.DataModels
 
             modelBuilder.Entity<CustomerContact>()
                 .Property(e => e.CustomerPhone)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Information>()
-                .Property(e => e.InfoCode)
                 .IsUnicode(false);
 
             modelBuilder.Entity<MenuImage>()
@@ -132,10 +124,6 @@ namespace NoiThatAdmin.Models.DataModels
                 .Property(e => e.EmailReview)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Slide>()
-                .Property(e => e.SlideURL)
-                .IsUnicode(false);
-
             modelBuilder.Entity<User>()
                 .Property(e => e.UserName)
                 .IsUnicode(false);
@@ -153,6 +141,11 @@ namespace NoiThatAdmin.Models.DataModels
                 .HasMany(e => e.Products)
                 .WithOptional(e => e.User)
                 .HasForeignKey(e => e.CreatedBy);
+
+            modelBuilder.Entity<User>()
+                .HasMany(e => e.Slides)
+                .WithOptional(e => e.User)
+                .HasForeignKey(e => e.CreateBy);
 
             modelBuilder.Entity<User>()
                 .HasMany(e => e.Users1)

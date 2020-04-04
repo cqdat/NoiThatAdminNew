@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
@@ -13,14 +12,13 @@ using PagedList;
 
 namespace NoiThatAdmin.Controllers
 {
-    public class BlogsController : Controller
+    public class AboutUsController : Controller
     {
         private TanThoiEntities db = new TanThoiEntities();
-
-        // GET: Blogs
+        // GET: AboutUs
         public ActionResult Index()
         {
-            ViewData["ListCate"] = db.Categories.Where(c => c.TypeCate == WebConstants.CategoryNews).ToList();
+            ViewData["ListCate"] = db.Categories.Where(c => c.TypeCate == WebConstants.CategoryAboutUs).ToList();
             return View();
         }
 
@@ -34,13 +32,13 @@ namespace NoiThatAdmin.Controllers
 
             if (pageSize == -1)
             {
-                pageSize = db.Blogs.Where(b=>b.TypeBlog==WebConstants.BlogNews).ToList().Count;
+                pageSize = db.Blogs.Where(b => b.TypeBlog == WebConstants.BlogAboutUs).ToList().Count;
             }
             ViewBag.PageSize = pageSize;
 
-            var lstprod = db.Blogs.ToList();
+            var lstprod = db.Blogs.Where(b => b.TypeBlog == WebConstants.BlogAboutUs).ToList();
 
-            
+
 
             if (!string.IsNullOrEmpty(TieuDe))
             {
@@ -54,7 +52,7 @@ namespace NoiThatAdmin.Controllers
             }
             ViewBag.DanhMuc = DanhMuc;
 
-           
+
             if (!string.IsNullOrEmpty(SEOKeywords))
             {
                 lstprod = lstprod.Where(s => s.SEOKeywords.ToUpper().Contains(SEOKeywords.ToUpper())).ToList();
@@ -67,30 +65,21 @@ namespace NoiThatAdmin.Controllers
             ViewBag.TotalRow = count;
             if (Request.IsAjaxRequest())
             {
-                return PartialView("~/Views/Blogs/_PartialIndex.cshtml", lstprod.ToList().ToPagedList(pageNumber ?? 1, pageSize ?? 2));
+                return PartialView("~/Views/AboutUs/_PartialIndex.cshtml", lstprod.ToList().ToPagedList(pageNumber ?? 1, pageSize ?? 2));
             }
             return View(lstprod.ToList().ToPagedList(pageNumber ?? 1, pageSize ?? 2));
         }
 
-        // GET: Blogs/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Blog blog = db.Blogs.Find(id);
-            if (blog == null)
-            {
-                return HttpNotFound();
-            }
-            return View(blog);
-        }
+        /// <summary>
+        /// Tạo mới bài viết về chúng tôi
+        /// </summary>
+        /// <returns></returns>
+        /// 
 
-        // GET: Blogs/Create
+        [Authorize]
         public ActionResult Create()
         {
-            ViewBag.CategoryID = new SelectList(db.Categories.Where(c=>c.TypeCate == WebConstants.CategoryNews), "CategoryID", "CategoryName");
+            ViewBag.CategoryID = new SelectList(db.Categories.Where(c => c.TypeCate == WebConstants.CategoryAboutUs), "CategoryID", "CategoryName");
             ViewBag.CreatedBy = new SelectList(db.Users, "UserID", "UserName");
             return View();
         }
@@ -101,7 +90,7 @@ namespace NoiThatAdmin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Create([Bind(Include = "BlogID,BlogName,ImageURL,Descript,Content,TypeBlog,CountView,IsActive,CategoryID,Created,CreatedBy,SEOTitle,SEOUrlRewrite,SEOKeywords,SEOMetadescription")] Blog blog,
+        public ActionResult Create([Bind(Include = "BlogID,BlogName,ImageURL,Descript,Content,TypeBlog,Sort,CountView,IsActive,CategoryID,Created,CreatedBy,SEOTitle,SEOUrlRewrite,SEOKeywords,SEOMetadescription")] Blog blog,
             HttpPostedFileBase HinhAnh)
         {
             if (ModelState.IsValid)
@@ -138,20 +127,20 @@ namespace NoiThatAdmin.Controllers
                 }
 
                 blog.SEOUrlRewrite = Helpers.ConvertToUpperLower(blog.BlogName);
-                blog.TypeBlog = WebConstants.BlogNews;
+                blog.TypeBlog = WebConstants.BlogAboutUs;
                 blog.CreatedBy = db.Users.FirstOrDefault(q => q.UserName == User.Identity.Name).UserID;
                 blog.Created = DateTime.Now;
                 blog.LastModify = DateTime.Now;
                 blog.CountView = 1;
                 db.Blogs.Add(blog);
                 db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                return RedirectToAction("Index");            }
 
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", blog.CategoryID);
             ViewBag.CreatedBy = new SelectList(db.Users, "UserID", "UserName", blog.CreatedBy);
             return View(blog);
         }
+
 
         // GET: Blogs/Edit/5
         public ActionResult Edit(int? id)
@@ -165,7 +154,7 @@ namespace NoiThatAdmin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoryID = new SelectList(db.Categories.Where(c => c.TypeCate == WebConstants.CategoryNews), "CategoryID", "CategoryName", blog.CategoryID);
+            ViewBag.CategoryID = new SelectList(db.Categories.Where(c => c.TypeCate == WebConstants.CategoryAboutUs), "CategoryID", "CategoryName", blog.CategoryID);
             ViewBag.CreatedBy = new SelectList(db.Users, "UserID", "UserName", blog.CreatedBy);
             return View(blog);
         }
@@ -176,7 +165,7 @@ namespace NoiThatAdmin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Edit([Bind(Include = "BlogID,BlogName,ImageURL,Descript,Content,TypeBlog,CountView,IsActive,CategoryID,Created,CreatedBy,SEOTitle,SEOUrlRewrite,SEOKeywords,SEOMetadescription")] Blog blog,
+        public ActionResult Edit([Bind(Include = "BlogID,BlogName,ImageURL,Descript,Content,TypeBlog,Sort,CountView,IsActive,CategoryID,Created,CreatedBy,SEOTitle,SEOUrlRewrite,SEOKeywords,SEOMetadescription")] Blog blog,
             HttpPostedFileBase HinhAnh)
         {
             if (ModelState.IsValid)
@@ -214,7 +203,7 @@ namespace NoiThatAdmin.Controllers
                         //var dir = Directory.CreateDirectory(path);
                         //HinhAnh.SaveAs(Path.Combine(path, myfile));
 
-                        blog.ImageURL= myfile;
+                        blog.ImageURL = myfile;
                         HinhAnh.SaveAs(path);
                     }
                     else
@@ -233,44 +222,9 @@ namespace NoiThatAdmin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CategoryID = new SelectList(db.Categories.Where(c => c.TypeCate == WebConstants.CategoryNews), "CategoryID", "CategoryName", blog.CategoryID);
+            ViewBag.CategoryID = new SelectList(db.Categories.Where(c => c.TypeCate == WebConstants.CategoryAboutUs), "CategoryID", "CategoryName", blog.CategoryID);
             ViewBag.CreatedBy = new SelectList(db.Users, "UserID", "UserName", blog.CreatedBy);
             return View(blog);
-        }
-
-        // GET: Blogs/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Blog blog = db.Blogs.Find(id);
-            if (blog == null)
-            {
-                return HttpNotFound();
-            }
-            return View(blog);
-        }
-
-        // POST: Blogs/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Blog blog = db.Blogs.Find(id);
-            db.Blogs.Remove(blog);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

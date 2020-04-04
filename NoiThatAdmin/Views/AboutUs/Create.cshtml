@@ -1,0 +1,152 @@
+﻿@model NoiThatAdmin.Models.DataModels.Blog
+
+@{
+    ViewBag.Title = "Tạo mới bài viết về chúng tôi";
+}
+
+
+@using (Html.BeginForm("Create", "AboutUs", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div id="page-heading">
+        <ol class="breadcrumb">
+            <li><a href="index.html">Trang chủ</a></li>
+            <li><a href="/AboutUs/Index">Danh sách Bài viết</a></li>
+            <li class="active">Tạo Mới</li>
+        </ol>
+
+        <h1>Tạo mới bài viết</h1>
+        <div class="options">
+            <div class="btn-toolbar">
+                <input type="submit" value="Lưu mới" class="btn btn-success" />
+                <a href="/AboutUs/Index" class="btn btn-primary">Quay Lại</a>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="background-color:#fff">
+
+
+        <div class="row">
+            <div class="col-md-6">
+                @*<img src="~/assets/demo/avatar/johansson.png" alt="" class="pull-left" style="margin: 0 20px 20px 0">*@
+                <div class="form-horizontal">
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.BlogName, "Tiêu đề", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.BlogName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.BlogName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CategoryID, "Loại Tin tức", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group" style="display:none">
+                        @Html.LabelFor(model => model.ImageURL, "Hình đại diện", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-3">
+                            <input type="file" id="HinhAnh" name="HinhAnh" />
+                            @Html.ValidationMessageFor(model => model.ImageURL, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.IsActive, "Ẩn/Hiện", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            <select class="form-control" id="IsActive" name="IsActive">
+                                <option selected="" value="true">Hiện thị</option>
+                                <option value="false">Ẩn</option>
+                            </select>
+                            @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                        </div>
+                        @Html.LabelFor(model => model.Sort, "Vị trí", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.Sort, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Sort, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*Right*@
+            <div class="col-md-6">
+                <div class="form-horizontal">
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SEOTitle, "Page Title", htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            @Html.EditorFor(model => model.SEOTitle, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.SEOTitle, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SEOKeywords, "SEO Keywords", htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            @Html.EditorFor(model => model.SEOKeywords, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.SEOKeywords, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SEOMetadescription, "Meta Description", htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            <textarea class="form-control" id="SEOMetadescription" name="SEOMetadescription" rows="4"></textarea>
+                            @Html.ValidationMessageFor(model => model.SEOMetadescription, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12" style="display:none">
+                <div class="form-group">
+
+                    <div class="col-md-12">
+                        <textarea class="form-control" placeholder="Nhập mô tả ngắn..." id="Descript" name="Descript" rows="4"></textarea>
+
+                        @Html.ValidationMessageFor(model => model.Descript, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <textarea id="Content" name="Content"></textarea>
+                @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+}
+
+
+@section scripts{
+    <script src="~/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript" src="~/ckfinder/ckfinder.js"></script>
+    <script type="text/javascript">
+        CKEDITOR.replace("Content",
+            {
+                height: '500px'
+            });
+        CKFinder.setupCKEditor(null, '/ckfinder')
+
+        $(document).ready(function () {
+
+            $("#BlogName").focusout(function () {
+                var BlogName = $("#BlogName").val();
+                $("#SEOTitle").val(BlogName);
+            });
+
+        });
+    </script>
+
+}
+
+
+

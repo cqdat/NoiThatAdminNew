@@ -14,6 +14,7 @@ namespace NoiThatAdmin.Models.DataModels
             Blogs = new HashSet<Blog>();
             Products = new HashSet<Product>();
             RolesUsers = new HashSet<RolesUser>();
+            Slides = new HashSet<Slide>();
             Users1 = new HashSet<User>();
         }
 
@@ -39,6 +40,9 @@ namespace NoiThatAdmin.Models.DataModels
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RolesUser> RolesUsers { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Slide> Slides { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<User> Users1 { get; set; }

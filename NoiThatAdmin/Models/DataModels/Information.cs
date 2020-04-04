@@ -11,7 +11,7 @@ namespace NoiThatAdmin.Models.DataModels
         [Key]
         public int InfoID { get; set; }
 
-        [StringLength(8)]
+        [StringLength(50)]
         public string InfoCode { get; set; }
 
         [StringLength(200)]

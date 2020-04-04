@@ -12,10 +12,22 @@ namespace NoiThatAdmin.Models.DataModels
         public int SlideID { get; set; }
 
         [StringLength(100)]
-        public string SlideURL { get; set; }
+        public string ImageURL { get; set; }
+
+        [StringLength(100)]
+        public string Slogun1 { get; set; }
+
+        [StringLength(100)]
+        public string Slogun2 { get; set; }
 
         [StringLength(200)]
         public string SlideTitle { get; set; }
+
+        [StringLength(500)]
+        public string LinkBanner { get; set; }
+
+        [StringLength(20)]
+        public string LinkTarget { get; set; }
 
         public int? CategoryID { get; set; }
 
@@ -24,5 +36,9 @@ namespace NoiThatAdmin.Models.DataModels
         public int? Sort { get; set; }
 
         public DateTime? Created { get; set; }
+
+        public int? CreateBy { get; set; }
+
+        public virtual User User { get; set; }
     }
 }
