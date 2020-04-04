@@ -56,15 +56,21 @@
                     @Html.DisplayFor(modelItem => item.CustomerContent)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IsActive)
+                    @if (item.IsActive == true)
+                    {
+                        <span class="badge badge-success">Hiện thị</span>
+                    }
+                    else
+                    {
+                        <span class="badge">Ẩn</span>
+                    }
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Created)
+                    @Convert.ToDateTime(item.Created).ToString(WebConstants.DateFormatVI)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.CustomerID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.CustomerID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.CustomerID })
+                    @Html.ActionLink("Sửa", "Edit", new { id = item.CustomerID }) |
+                    @Html.ActionLink("Xóa", "Delete", new { id = item.CustomerID })
                 </td>
             </tr>
         }

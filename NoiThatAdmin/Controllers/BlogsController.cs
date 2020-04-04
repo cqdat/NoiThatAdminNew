@@ -38,7 +38,7 @@ namespace NoiThatAdmin.Controllers
             }
             ViewBag.PageSize = pageSize;
 
-            var lstprod = db.Blogs.ToList();
+            var lstprod = db.Blogs.Where(b => b.TypeBlog == WebConstants.BlogNews).ToList();
 
             
 

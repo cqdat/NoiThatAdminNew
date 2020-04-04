@@ -113,11 +113,54 @@ namespace NoiThatAdmin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CustomerID,CustomerName,CustomerImage,CustomerContent,IsActive,Created")] Customer customer)
+        public ActionResult Edit([Bind(Include = "CustomerID,CustomerName,CustomerImage,CustomerContent,IsActive,Created")] Customer customer,
+            HttpPostedFileBase HinhAnh)
         {
             if (ModelState.IsValid)
             {
+                var allowedExtensions = new[] {
+            ".Jpg", ".png", ".jpg", "jpeg"
+                };
+
+                if (HinhAnh == null)
+                {
+                    customer.CustomerImage = customer.CustomerImage;
+                }
+                else
+                {
+
+                    //Xóa hình ảnh đã tồn tại, trừ hình ảnh mặc định.
+                    if (customer.CustomerImage != "NoImage.png")
+                    {
+                        string fullPath = Request.MapPath(WebConstants.imgLogoCust + "/" + customer.CustomerImage);
+                        if (System.IO.File.Exists(fullPath))
+                        {
+                            System.IO.File.Delete(fullPath);
+                        }
+                    }
+
+                    var fileName = Path.GetFileName(HinhAnh.FileName);
+                    var ext = Path.GetExtension(HinhAnh.FileName);
+                    if (allowedExtensions.Contains(ext)) //check what type of extension  
+                    {
+                        string name = Path.GetFileNameWithoutExtension(fileName); //getting file name without extension  
+                        string myfile = name + "_" + DateTime.Now.Millisecond + ext; //appending the name with id  
+                                                                                     // store the file inside ~/project folder(Img)  
+
+                        var path = Path.Combine(Server.MapPath(WebConstants.imgLogoCust), myfile);
+                        //var dir = Directory.CreateDirectory(path);
+                        //HinhAnh.SaveAs(Path.Combine(path, myfile));
+
+                        customer.CustomerImage = myfile;
+                        HinhAnh.SaveAs(path);
+                    }
+                    else
+                    {
+                        ViewBag.message = "Please choose only Image file";
+                    }
+                }
                 db.Entry(customer).State = EntityState.Modified;
+                Success(string.Format("sửa thông tin <b>{0}</b> thành công.", customer.CustomerName), true);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

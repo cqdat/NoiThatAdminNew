@@ -8,11 +8,11 @@ namespace NoiThatAdmin.Utilities
 {
     public class WebConstants
     {
-        public static string ImgProduct = ConfigurationManager.AppSettings["ImagesBasePath"];
-        public static string ImgProductThumbs = "~/Photos/Products/_thumbs";
+        public static string ImgProduct = ConfigurationManager.AppSettings["ImgProduct"];
+        public static string ImgProductThumbs = ConfigurationManager.AppSettings["ImgProductThumbs"];
 
-        public static string ImgProductShow = "/Photos/Products";
-        public static string ImgProductThumbsShow = "Photos/Products/_thumbs";
+        public static string ImgProductShow = ConfigurationManager.AppSettings["ImgProductShow"];
+        public static string ImgProductThumbsShow = ConfigurationManager.AppSettings["ImgProductThumbsShow"];
 
         public static string imgNewsURL = "~/Photos/News";
         public static string imgNewsURLShow = "/Photos/News";
