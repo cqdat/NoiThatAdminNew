@@ -6,7 +6,7 @@ using System.Web;
 
 namespace NoiThatAdmin.Utilities
 {
-    public class WebConstants
+    public static class WebConstants
     {
         public static string ImgProduct = ConfigurationManager.AppSettings["ImgProduct"];
         public static string ImgProductThumbs = ConfigurationManager.AppSettings["ImgProductThumbs"];
