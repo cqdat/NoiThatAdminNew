@@ -14,7 +14,11 @@ namespace NoiThatAdmin.Utilities
         public static string ImgProductShow = ConfigurationManager.AppSettings["ImgProductShow"];
         public static string ImgProductThumbsShow = ConfigurationManager.AppSettings["ImgProductThumbsShow"];
 
-        public static string ImgSlideshow = ConfigurationManager.AppSettings["ImgSlideshow"];
+        public static string ImgCollections = ConfigurationManager.AppSettings["ImgCollections"];
+        public static string ImgImgCollectionsThumbs = ConfigurationManager.AppSettings["ImgImgCollectionsThumbs"];
+
+        //public static string ImgProductShow = ConfigurationManager.AppSettings["ImgProductShow"];
+        //public static string ImgProductThumbsShow = ConfigurationManager.AppSettings["ImgProductThumbsShow"];
 
         public static string imgNewsURL = "~/Photos/News";
         public static string imgNewsURLShow = "/Photos/News";

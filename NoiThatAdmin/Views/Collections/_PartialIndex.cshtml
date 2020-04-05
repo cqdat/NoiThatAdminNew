@@ -18,12 +18,10 @@
                     <tr>
                         
                         <th style="width:30px">STT</th>
-                        <th>Mã Sản phẩm</th>
-                        <th style="width:200px">Tên Sản phẩm</th>
+                        <th style="width:200px">Bộ sưu tập</th>
                         <th>Danh Mục Cấp 1</th>
                         <th>Danh Mục Cấp 2</th>
                         <th>Hình đại diện</th>
-                        <th style="width:60px">Sản phẩm<br /> mới</th>
                         <th style="width:60px">Hiện thị<br />Website</th>
                         <th style="width:60px">Lượt <br /> Xem</th>
                         <th>Tạo lúc</th>
@@ -41,11 +39,9 @@
                         <tr>
 
                             <td style="width:30px">@stt</td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ProductCode)
-                            </td>
+                            
                             <td style="width:200px">
-                                <a href="/Products/Details/@item.ProductID">
+                                <a href="/Collections/Details/@item.ProductID">
                                     @Html.DisplayFor(modelItem => item.ProductName)
                                 </a>
                                 
@@ -62,18 +58,7 @@
 
                             </td>
 
-                            <td style="width:60px">
-
-                                @if (item.IsNew == true)
-                                {
-                                    <span class="badge badge-danger">SP Mới</span>
-                                }
-                                else
-                                {
-                                    <span></span>
-                                }
-
-                            </td>
+                           
 
                             <td style="width:60px">
                                 @if (item.IsActive == true)

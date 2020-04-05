@@ -181,6 +181,7 @@
     <Compile Include="Controllers\BlogCategoriesController.cs" />
     <Compile Include="Controllers\BlogsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\CollectionCategoriesController.cs" />
     <Compile Include="Controllers\CollectionsController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -627,11 +628,20 @@
     <Content Include="Views\Customers\Details.cshtml" />
     <Content Include="Views\Customers\Edit.cshtml" />
     <Content Include="Views\Customers\Index.cshtml" />
-    <Content Include="Views\Products\_image.cshtml" />
-    <Content Include="Views\Slides\ForHomepage.cshtml" />
-    <Content Include="Views\Slides\ForCategory.cshtml" />
     <Content Include="Views\Collections\Index.cshtml" />
-    <Content Include="Views\Slides\ForDefault.cshtml" />
+    <Content Include="Views\Products\_image.cshtml" />
+    <Content Include="Views\Collections\_PartialIndex.cshtml" />
+    <Content Include="Views\Slides\ForCategory.cshtml" />
+    <Content Include="Views\Slides\ForHomepage.cshtml" />
+    <Content Include="Views\Collections\Create.cshtml" />
+    <Content Include="Views\Collections\Edit.cshtml" />
+    <Content Include="Views\Collections\Delete.cshtml" />
+    <Content Include="Views\CollectionCategories\Index.cshtml" />
+    <Content Include="Views\CollectionCategories\_PartialIndex.cshtml" />
+    <Content Include="Views\CollectionCategories\Details.cshtml" />
+    <Content Include="Views\CollectionCategories\Create.cshtml" />
+    <Content Include="Views\CollectionCategories\Edit.cshtml" />
+    <Content Include="Views\Collections\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

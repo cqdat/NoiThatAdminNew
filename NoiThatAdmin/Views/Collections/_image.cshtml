@@ -1,0 +1,35 @@
+﻿@model List<NoiThatAdmin.Models.DataModels.ProductImage>
+@using NoiThatAdmin.Utilities
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                Hình Ảnh
+            </th>
+            <th>
+                Tiêu đề
+            </th>
+            <th>
+                #
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var q in Model)
+        {
+            <tr>
+                <td>
+                    <img src="@WebConstants.ImgProductThumbsShow/@q.ImagesThumb" />
+                </td>
+                <td class="imgtitle">
+                    @q.Title
+                </td>
+                <td>
+                    <a href="javascript:" class="edittitleimage" imageid="@q.ImageID">Sửa tiêu đề</a> |
+                    <a href="javascript:" class="changeavatar" imageid="@q.ImageID">Chọn làm đại diện</a> |
+                    <a href="javascript:" class="deleteimage" imageid="@q.ImageID">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

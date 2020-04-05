@@ -1,0 +1,193 @@
+﻿@model NoiThatAdmin.Models.DataModels.Product
+@using NoiThatAdmin.Utilities
+@{
+    ViewBag.Title = "Details";
+}
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="index.html">Trang chủ</a></li>
+        <li class="active">Chi tiết @Model.ProductName</li>
+
+    </ol>
+
+    <h1>Chi tiết</h1>
+    <div class="options">
+        <div class="btn-toolbar">
+            <a href="javascript:" class="btn btn-label btn-info" id="btnUploadImage" productid="@Model.ProductID"><i class="fa fa-upload"></i>Upload ảnh</a>
+            <a href="/Collections/Edit/@Model.ProductID" class="btn btn-success btn-label"><i class="fa fa-edit"></i>Chỉnh sửa</a>
+            <a href="/Collections/Index" class="btn btn-primary">Quay Lại</a>
+        </div>
+    </div>
+</div>
+<div class="container" style="padding:5px;">
+    @{ Html.RenderPartial("_Alerts"); }
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-midnightblue">
+                <div class="panel-body">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img src="@WebConstants.ImgProductShow/@Model.Images" alt="" class="pull-left" style="margin: 0 20px 20px 0; width:100px">
+                            <div class="table-responsive">
+                                <h4>Tên Bộ Sưu tập: <strong>@Model.ProductName</strong>(@Model.ProductCode)</h4>
+                                <table class="table table-condensed">
+
+                                    <!-- <thead>
+                                        <tr>
+                                            <th width="50%"></th>
+                                            <th width="50%"></th>
+                                        </tr>
+                                    </thead> -->
+                                    <tbody>
+                                        <tr>
+                                            <td>DM Cha</td>
+                                            <td><a href="#">@Model.Category.CategoryName</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>DM Con</td>
+                                            <td><a href="#">@Model.Category1.CategoryName</a></td>
+                                        </tr>
+                                        
+                                        
+                                        <tr>
+                                            <td>Lượt xem</td>
+                                            <td>
+                                                <span class="badge badge-info">@Model.CountView</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ẩn/Hiện Website</td>
+                                            <td>
+                                                @if (Model.IsActive == true)
+                                                {
+                                                    <span class="badge badge-success">Đang hiện thị</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge">Ẩn</span>
+                                                }
+                                            </td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td>Tạo lúc</td>
+                                            <td>
+                                                @Convert.ToDateTime(Model.Created).ToString(WebConstants.DatetimeFormatVI)  bởi: <a>@Model.User.UserName</a>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Mô tả ngắn</h4>
+                            <p>
+                                @Model.ShortDescription
+                            </p>
+                            <h4>SEO Google</h4>
+                            <table class="table table-condensed">
+
+                                <tbody>
+                                    <tr>
+                                        <td>Page Title</td>
+                                        <td><a href="#">@Model.SEOTitle</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>URL thân thiện</td>
+                                        <td><a href="#">@Model.SEOUrlRewrite</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>SEO Keywords</td>
+                                        <td>@Model.SEOKeywords</td>
+                                    </tr>
+                                    <tr>
+                                        <td>SEO Metadescription</td>
+                                        <td>@Model.SEOMetadescription</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="tab-container tab-success">
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a href="#home1" data-toggle="tab">Bài viết</a></li>
+                                    <li class=""><a href="#uploadhinhanh" data-toggle="tab" id="tabHinhAnh">Hình ảnh</a></li>
+                                    <li class=""><a href="#profile2" data-toggle="tab">Tags</a></li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane active clearfix" id="home1">
+                                        @Html.Raw(Model.Content)
+                                    </div>
+
+                                    <div class="tab-pane" id="uploadhinhanh">
+
+                                    </div>
+                                    <div class="tab-pane" id="profile2">
+                                        Tags
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="modal fade" id="UploadImageData" tabindex="-1" role="dialog" aria-labelledby="UploadImageData">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="UploadImageDatalbl">Upload Hình Ảnh</h4>
+            </div>
+            <div class="modal-body">
+                @Html.Partial("_form")
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Đóng và Tải Trang</button>
+                @*<button type="button" class="btn btn-primary">Save changes</button>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="EditTitle" tabindex="-1" role="dialog" aria-labelledby="EditTitle">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="EditTitle">Chỉnh Sửa Tiêu Đề</h4>
+            </div>
+            <form method="post" action="~/products/edittitle">
+                <input type="hidden" id="hdImageID" name="hdImageID" />
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="txtTitleEdit">Tiêu đề</label>
+                        <textarea class="form-control" id="txtTitleEdit" name="etitle" placeholder="tiêu đề"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<input type="hidden" id="hdProductIDDetail" value="@Model.ProductID" />
