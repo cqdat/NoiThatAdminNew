@@ -1,0 +1,150 @@
+﻿@model IEnumerable<NoiThatAdmin.Models.DataModels.Slide>
+@using NoiThatAdmin.Utilities
+@{
+    ViewBag.Title = "Hình Ảnh";
+}
+
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="/">Trang chủ</a></li>
+        <li class="active">Slide trang chủ</li>
+
+    </ol>
+
+    <h1>DS Slide Hình Ảnh Trang Chủ</h1>
+    <div class="options">
+        <div class="btn-toolbar">
+            <a href="javascript:" class="btn btn-success btn-label" id="btnaddnewslide"><i class="fa fa-plus"></i>Thêm mới</a>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="col-md-12">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        Hình Ảnh
+                    </th>
+                    <th>
+                        Slogan 1
+                    </th>
+                    <th>
+                        Slogan 2
+                    </th>
+                    <th>
+                        Tiêu đề
+                    </th>
+                    <th>
+                        Đường dẫn
+                    </th>
+                    <th>
+                        #
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var q in Model)
+                {
+                    <tr>
+                        <td>
+                            <img src="@WebConstants.ImgProductThumbsShow/@q.ImageURL" />
+                        </td>
+                        <td>
+                            @q.Slogun1
+                        </td>
+                        <td>
+                            @q.Slogun2
+                        </td>
+                        <td>
+                            @q.SlideTitle
+                        </td>
+                        <td>
+                            @q.LinkBanner
+                        </td>
+                        <td>
+                            #
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<div class="modal fade" id="NewSlide" tabindex="-1" role="dialog" aria-labelledby="NewSlide">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="NewSlidelbl">Tạo mới slide hình ảnh</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="txtTitleSlide">Tiêu đề</label>
+                            <input type="text" class="form-control" id="txtTitleSlide" placeholder="tiêu đề">
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="txtSlogan1">Slogan 1</label>
+                            <input type="text" class="form-control" id="txtSlogan1" placeholder="slogan">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="txtSlogan2">Slogan 2</label>
+                            <input type="text" class="form-control" id="txtSlogan2" placeholder="slogan">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="txtLinkBanner">Đường dẫn mục tiêu</label>
+                            <input type="text" class="form-control" id="txtLinkBanner" placeholder="đường dẫn">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="slTargetLink">Loại đường dẫn</label>
+                            <select class="form-control" id="slTargetLink">
+                                <option value="0">Mở trang mới</option>
+                                <option value="1">Mở tab mới</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="fileupload">Hình ảnh</label>
+                            <input type="file" class="form-control" id="fileupload" name="file" placeholder="tiêu đề">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="txtSort">Sắp xếp</label>
+                            <input type="number" class="form-control" id="txtSort" placeholder="sắp xếp" value="1">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

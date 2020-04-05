@@ -40,6 +40,9 @@
 
                                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                         @Html.HiddenFor(model => model.BlogID)
+                                        @Html.HiddenFor(model => model.ImageURL)
+                                        @Html.HiddenFor(model => model.TypeBlog)
+                                        @Html.HiddenFor(model => model.Created)
                                         <div class="form-group">
                                             @Html.LabelFor(model => model.BlogName, "Tiêu đề", htmlAttributes: new { @class = "control-label col-md-2" })
                                             <div class="col-md-10">
@@ -108,7 +111,7 @@
                                         <div class="form-group">
                                             @Html.LabelFor(model => model.SEOMetadescription, "Meta Description", htmlAttributes: new { @class = "control-label col-md-3" })
                                             <div class="col-md-9">
-                                                <textarea class="form-control" id="SEOMetadescription" name="SEOMetadescription" rows="4"></textarea>
+                                                <textarea class="form-control" id="SEOMetadescription" name="SEOMetadescription" rows="4">@Model.SEOMetadescription</textarea>
                                                 @Html.ValidationMessageFor(model => model.SEOMetadescription, "", new { @class = "text-danger" })
                                             </div>
                                         </div>

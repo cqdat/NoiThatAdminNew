@@ -1,71 +1,76 @@
 ﻿@model NoiThatAdmin.Models.DataModels.Customer
-
+@using NoiThatAdmin.Utilities
 @{
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
-
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Customers", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Customer</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.CustomerID)
+    <div id="page-heading">
+        <ol class="breadcrumb">
+            <li><a href="index.html">Trang chủ</a></li>
+            <li class="active">Chỉnh sửa KH</li>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CustomerName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CustomerName, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        </ol>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CustomerImage, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CustomerImage, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CustomerImage, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        <h1>Sửa</h1>
+        <div class="options">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CustomerContent, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CustomerContent, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CustomerContent, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.IsActive)
-                    @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Created, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Created, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Created, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+            <div class="btn-toolbar">
+                <input type="submit" value="Lưu" class="btn btn-success" />
+                <a href="/Customers/Index" class="btn btn-primary">Quay Lại</a>
             </div>
         </div>
     </div>
-}
+    <div class="container" style="background-color:#ffffff">
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.CustomerID)
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+        <div class="form-horizontal">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.CustomerName, "Tên KH", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CustomerName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CustomerImage, "Logo", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    <input type="file" id="HinhAnh" name="HinhAnh" />
+                    @Html.ValidationMessageFor(model => model.CustomerImage, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-4">
+                    <img src="@WebConstants.imgLogoCustShow/@Model.CustomerImage" style="height:80px" />
+                    @Html.ValidationMessageFor(model => model.CustomerImage, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CustomerContent, "Mô tả ngắn", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-8">
+                    <textarea id="CustomerContent" name="CustomerContent" rows="4" class="form-control">@Model.CustomerContent</textarea>
+
+                    @Html.ValidationMessageFor(model => model.CustomerContent, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.IsActive, "Ẩn/Hiện", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-8">
+                    <div class="checkbox">
+                        <select class="form-control" id="IsActive" name="IsActive">
+                            <option selected value="true">Hiện thị</option>
+                            <option value="false">Ẩn</option>
+                        </select>
+                        @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+}

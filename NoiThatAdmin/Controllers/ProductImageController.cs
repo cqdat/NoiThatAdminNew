@@ -13,17 +13,17 @@ namespace NoiThatAdmin.Controllers
     
     public class ProductImageController : Controller
     {
-        TanThoiEntities db = new TanThoiEntities();
+        //TanThoiEntities db = new TanThoiEntities();
         FilesHelper h;
         string tempPath = "~/Upload/";
-        string serverMapPath = "~/Media/Upload/";
+        string serverMapPath = "~/Photos/Products/";
 
         private string StorageRoot
         {
             get { return Path.Combine(HostingEnvironment.MapPath(serverMapPath)); }
         }
 
-        private string UrlBase = "/Media/Upload/";
+        private string UrlBase = "/Photos/Products/";
         string DeleteURL = "/ProductImage/DeleteFile/?file=";
         string DeleteType = "GET";
         public ProductImageController()
@@ -73,11 +73,6 @@ namespace NoiThatAdmin.Controllers
             return Json("OK", JsonRequestBehavior.AllowGet);
         }
 
-        public PartialViewResult GetImageforProduct(int? productid)
-        {
-            var model = db.ProductImages.Where(q => q.ProductID == productid).ToList();
-
-            return PartialView("_image", model);
-        }
+        
     }
 }

@@ -40,11 +40,11 @@ namespace NoiThatAdmin.Controllers
 
             if (pageSize == -1)
             {
-                pageSize = db.Products.ToList().Count;
+                pageSize = db.Products.Where(p=>p.IsProduct == true).ToList().Count;
             }
             ViewBag.PageSize = pageSize;
 
-            var lstprod = db.Products.ToList();
+            var lstprod = db.Products.Where(p => p.IsProduct == true).ToList();
 
             if (!string.IsNullOrEmpty(MaSP))
             {
@@ -160,7 +160,7 @@ namespace NoiThatAdmin.Controllers
                     }
                 }
 
-
+                product.IsProduct = true;
                 product.Price = "0";
                 product.PriceSale = "0";
                 product.SEOUrlRewrite = Helpers.ConvertToUpperLower(product.ProductName);
@@ -257,6 +257,7 @@ namespace NoiThatAdmin.Controllers
                     }
                 }
 
+                product.IsProduct = true;
                 product.Price = product.Price;
                 product.PriceSale = product.PriceSale;
                 product.Created = product.Created;
@@ -337,6 +338,60 @@ namespace NoiThatAdmin.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public PartialViewResult GetImageforProduct(int? productid)
+        {
+            var model = db.ProductImages.Where(q => q.ProductID == productid).ToList();
+
+            return PartialView("_image", model);
+        }
+        public ActionResult EditTitle(int? hdImageID, string etitle)
+        {
+            var img = db.ProductImages.Find(hdImageID);
+            img.Title = etitle;
+            db.SaveChanges();
+            return Redirect(Request.UrlReferrer.ToString());
+        }
+
+        public JsonResult DeleteProductImage(int? imageid)
+        {
+            string result = "FAIL";
+            try
+            {
+                var img = db.ProductImages.Find(imageid);
+                db.ProductImages.Remove(img);
+                db.SaveChanges();
+                result = "DONE";
+            }
+            catch
+            {
+
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+
+        }
+
+        public JsonResult ChangeProductAvatar(int? imageid)
+        {
+            string result = "FAIL";
+            try
+            {
+                var img = db.ProductImages.Find(imageid);
+                var product = db.Products.Find(img.ProductID);
+
+                product.Images = img.URLImage;
+                product.ImagesThumb = img.ImagesThumb;
+
+                db.SaveChanges();
+                result = "DONE";
+            }
+            catch
+            {
+
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+
         }
     }
 }
