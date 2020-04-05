@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using NoiThatAdmin.Models.DataModels;
 using NoiThatAdmin.Models;
+using NoiThatAdmin.Utilities;
 
 namespace NoiThatAdmin.Controllers
 {
@@ -33,7 +34,9 @@ namespace NoiThatAdmin.Controllers
         public ActionResult ListMenus()
         {
             MenuViewModel menus = new MenuViewModel();
-            menus.lstMenuCha = db.Categories.Where(c => c.Parent == 0).ToList();
+            menus.lstMenuCha = db.Categories.Where(c => c.Parent == 0 && c.TypeCate == WebConstants.CategoryProduct).ToList();
+            menus.lstCollectionParent = db.Categories.Where(c => c.Parent == 0 && c.TypeCate == WebConstants.CategoryCollection).ToList();
+            menus.lstNews = db.Categories.Where(c => c.Parent == 0 && c.TypeCate == WebConstants.CategoryNews).ToList();
             return View(menus);
         }
     }

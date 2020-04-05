@@ -165,8 +165,8 @@ namespace NoiThatAdmin.Controllers
                 product.PriceSale = "0";
                 product.SEOUrlRewrite = Helpers.ConvertToUpperLower(product.ProductName);
                 product.Created = DateTime.Now;
-                //product.CreatedBy = db.Users.FirstOrDefault(q => q.UserName == User.Identity.Name).UserID;
-                product.CreatedBy = 1;
+                product.CreatedBy = db.Users.FirstOrDefault(q => q.UserName == User.Identity.Name).UserID;
+                //product.CreatedBy = 1;
                 db.Products.Add(product);
                 db.SaveChanges();
                 Success(string.Format("Thêm mới sản phẩm<b>{0}</b> thành công.", product.ProductName), true);
@@ -277,7 +277,7 @@ namespace NoiThatAdmin.Controllers
         }
         #endregion
 
-
+        #region Delete product
         // GET: Products/Delete/5
         [Authorize]
         public ActionResult Delete(int? id)
@@ -316,6 +316,8 @@ namespace NoiThatAdmin.Controllers
 
             return RedirectToAction("Index");
         }
+        #endregion
+
 
         #region JSON 
         public JsonResult LoadMenuCap2(int ParentID)
