@@ -181,6 +181,7 @@
     <Compile Include="Controllers\BlogCategoriesController.cs" />
     <Compile Include="Controllers\BlogsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\CollectionsController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InformationController.cs" />
@@ -626,9 +627,6 @@
     <Content Include="Views\Customers\Details.cshtml" />
     <Content Include="Views\Customers\Edit.cshtml" />
     <Content Include="Views\Customers\Index.cshtml" />
-    <Content Include="Views\Products\_image.cshtml" />
-    <Content Include="Views\Slides\ForHomepage.cshtml" />
-    <Content Include="Views\Slides\ForCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -638,6 +636,7 @@
     <Folder Include="Photos\Products\_thumbs\" />
     <Folder Include="Photos\Slides\" />
     <Folder Include="Views\Base\" />
+    <Folder Include="Views\Collection\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
