@@ -270,3 +270,7 @@ td.viewpermission
     color:#f00;
     font-weight:bold;
 }
+#tbslide tbody tr td:first-child img
+{
+    width:88px;
+}

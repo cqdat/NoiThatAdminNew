@@ -181,6 +181,7 @@
     <Compile Include="Controllers\BlogCategoriesController.cs" />
     <Compile Include="Controllers\BlogsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\CollectionsController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InformationController.cs" />
@@ -629,6 +630,8 @@
     <Content Include="Views\Products\_image.cshtml" />
     <Content Include="Views\Slides\ForHomepage.cshtml" />
     <Content Include="Views\Slides\ForCategory.cshtml" />
+    <Content Include="Views\Collections\Index.cshtml" />
+    <Content Include="Views\Slides\ForDefault.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

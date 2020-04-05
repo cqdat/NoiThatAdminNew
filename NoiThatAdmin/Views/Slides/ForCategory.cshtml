@@ -1,4 +1,4 @@
-﻿@model IEnumerable<NoiThatAdmin.Models.DataModels.Slide>
+﻿@model NoiThatAdmin.Models.SlideCateViewModel
 @using NoiThatAdmin.Utilities
 @{
     ViewBag.Title = "Hình Ảnh";
@@ -14,14 +14,14 @@
     <h1>DS Slide Hình Ảnh Theo Loại Sản Phẩm</h1>
     <div class="options">
         <div class="btn-toolbar">
-            <a href="javascript:" class="btn btn-success btn-label"><i class="fa fa-plus"></i>Thêm mới</a>
+            <a href="javascript:" class="btn btn-success btn-label" id="btnaddnewslide2"><i class="fa fa-plus"></i>Thêm mới</a>
         </div>
     </div>
 </div>
 
 <div class="container">
     <div class="col-md-12">
-        <table class="table table-bordered">
+        <table class="table table-bordered" id="tbslide">
             <thead>
                 <tr>
                     <th>
@@ -48,11 +48,11 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var q in Model)
+                @foreach (var q in Model.slides)
                 {
                     <tr>
                         <td>
-                            <img src="@WebConstants.ImgProductThumbsShow/@q.ImageURL" />
+                            <img src="@WebConstants.ImgSlideshow/@q.ImageURL" />
                         </td>
                         <td>
                             @q.Slogun1
@@ -76,5 +76,99 @@
                 }
             </tbody>
         </table>
+    </div>
+</div>
+
+
+<div class="modal fade" id="NewSlideCate" tabindex="-1" role="dialog" aria-labelledby="NewSlideCate">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="NewSlideCate">Tạo mới slide hình ảnh theo loại sản phẩm</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="txtTitleSlide">Tiêu đề</label>
+                            <input type="text" class="form-control" id="txtTitleSlide" placeholder="tiêu đề">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="txtSlogan1">Slogan 1</label>
+                            <input type="text" class="form-control" id="txtSlogan1" placeholder="slogan">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="txtSlogan2">Slogan 2</label>
+                            <input type="text" class="form-control" id="txtSlogan2" placeholder="slogan">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="txtLinkBanner">Đường dẫn mục tiêu</label>
+                            <input type="text" class="form-control" id="txtLinkBanner" placeholder="đường dẫn">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="slTargetLink">Loại đường dẫn</label>
+                            <select class="form-control" id="slTargetLink">
+                                <option value="_parent">Mở trang mới</option>
+                                <option value="_blank">Mở tab mới</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="fileupload">Hình ảnh</label>
+                            <input type="file" class="form-control" id="FileUpload" name="FileUpload" placeholder="tiêu đề">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="txtSort">Sắp xếp</label>
+                            <input type="number" class="form-control" id="txtSort" placeholder="sắp xếp" value="1">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="slCategorySlide">Loại sản phẩm</label>
+                            <select class="form-control" id="slCategorySlide">
+                                <option value="0">Chọn loại sản phẩm</option>
+                                @foreach(var q in Model.categories)
+                                {
+                                    <option value="@q.CategoryID">@q.CategoryName</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                       
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="btnAddSlideCate">Lưu</button>
+            </div>
+        </div>
     </div>
 </div>

@@ -38,4 +38,10 @@ namespace NoiThatAdmin.Models
         public List<DataPermission> Allow { get; set; }
         public List<DataPermission> Available { get; set; }
     }
+
+    public class SlideCateViewModel
+    {
+        public List<Category> categories { get; set; }
+        public List<Slide> slides { get; set; }
+    }
 }

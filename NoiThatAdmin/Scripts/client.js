@@ -379,67 +379,101 @@
 
     });
 
+    $(document).on("click", "#btnaddnewslide2", function () {
 
-    $(document).on("click", "#btnUpdateImage", function () {
+        $('#NewSlideCate').modal({ backdrop: 'static', keyboard: false });
+
+    });
+
+    $(document).on("click", "#btnaddnewslide3", function () {
+
+        $('#NewSlide3').modal({ backdrop: 'static', keyboard: false });
+
+    });
+
+
+    $(document).on("click", "#btnAddSlide", function () {
 
 
         if (window.FormData !== undefined) {
 
+      
             var fileUpload = $("#FileUpload").get(0);
-            var files = fileUpload.files;
 
-            var fileData = new FormData();
-
-
-            for (var i = 0; i < files.length; i++) {
-                fileData.append(files[i].name, files[i]);
+            if (fileUpload.files.length === 0) {
+                alert("Vui lòng chọn file upload !");
             }
-                       
-            fileData.append('username', 'tanthoi');
+            else {
 
-            loadingstart();
+                var title = $("#txtTitleSlide").val().trim();
+                var slogan1 = $("#txtSlogan1").val().trim();
+                var slogan2 = $("#txtSlogan2").val().trim();
+                var link = $("#txtLinkBanner").val().trim();
+                var target = $("#slTargetLink").children("option:selected").val().trim();
+                var sort = $("#txtSort").val().trim(); 
 
-            $.ajax({
-                url: '/asset/UploadImage',
-                type: "POST",
-                contentType: false, 
-                processData: false, 
-                data: fileData,
-                success: function (result) {
-
-                    if (result != "FAIL") {
-                        var assetid = $("#hdAssetID").val().trim();
-                        $.ajax({
-                            url: '/asset/ImageAsset',
-                            contentType: 'application/html; charset=utf-8',
-                            data: { file: result, assetid: assetid },
-                            type: 'GET',
-                            dataType: 'json'
-                            , success: function (data) {
-
-
-                                if (data == "DONE") {
-                                    location.reload();
-                                }
-                                else {
-                                    alert("Có lỗi trong quá trình save data !");
-                                }
-
-                            },
-                            error: function (xhr, status) {
-                                alert("Fail connect to system server. Please try again or check internet connection.");
-                            },
-                            complete: function (xhr, status) {
-                                loadingstop();
-                            }
-                        });
-
-                    }
-                },
-                error: function (err) {
-                    alert(err.statusText);
+                if (title == "" || slogan1 == "" || slogan2 == "" || link == "" || sort == "") {
+                    alert("Vui lòng điền đầy đủ các trường phía trên");
                 }
-            });
+                else {
+
+                    var files = fileUpload.files;
+
+                    var fileData = new FormData();
+
+                    for (var i = 0; i < files.length; i++) {
+                        fileData.append(files[i].name, files[i]);
+                    }
+
+                    fileData.append('username', 'tanthoi');
+
+                    //loadingstart();
+
+                    $.ajax({
+                        url: '/slides/UploadImage',
+                        type: "POST",
+                        contentType: false,
+                        processData: false,
+                        data: fileData,
+                        success: function (result) {
+
+                            if (result != "FAIL") {
+
+                                $.ajax({
+                                    url: '/slides/createslide',
+                                    contentType: 'application/html; charset=utf-8',
+                                    data: { urlimg: result, target: target, sort: sort, link: link, slogan2: slogan2, slogan1: slogan1, title: title},
+                                    type: 'GET',
+                                    dataType: 'json'
+                                    , success: function (data) {
+
+                                        if (data == "DONE") {
+                                            location.reload();
+                                        }
+                                        else {
+                                            alert("Có lỗi trong quá trình save data !");
+                                        }
+
+                                    },
+                                    error: function (xhr, status) {
+                                        alert("Fail connect to system server. Please try again or check internet connection.");
+                                    },
+                                    complete: function (xhr, status) {
+                                        //loadingstop();
+                                    }
+                                });
+
+                            }
+                        },
+                        error: function (err) {
+                            alert(err.statusText);
+                        }
+                    });
+
+                }
+            }
+
+            
         } else {
             alert("FormData is not supported.");
         }
@@ -448,5 +482,189 @@
     });
 
 
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    $(document).on("click", "#btnAddSlideCate", function () {
+
+
+        if (window.FormData !== undefined) {
+
+
+            var fileUpload = $("#FileUpload").get(0);
+
+            if (fileUpload.files.length === 0) {
+                alert("Vui lòng chọn file upload !");
+            }
+            else {
+
+                var title = $("#txtTitleSlide").val().trim();
+                var slogan1 = $("#txtSlogan1").val().trim();
+                var slogan2 = $("#txtSlogan2").val().trim();
+                var link = $("#txtLinkBanner").val().trim();
+                var target = $("#slTargetLink").children("option:selected").val().trim();
+                var sort = $("#txtSort").val().trim();
+                var category = $("#slCategorySlide").children("option:selected").val().trim();
+
+                if (title == "" || slogan1 == "" || slogan2 == "" || link == "" || sort == "" || category == 0) {
+                    alert("Vui lòng điền đầy đủ các trường phía trên !");
+                }
+                else {
+
+                    var files = fileUpload.files;
+
+                    var fileData = new FormData();
+
+                    for (var i = 0; i < files.length; i++) {
+                        fileData.append(files[i].name, files[i]);
+                    }
+
+                    fileData.append('username', 'tanthoi');
+
+                    //loadingstart();
+
+                    $.ajax({
+                        url: '/slides/UploadImage',
+                        type: "POST",
+                        contentType: false,
+                        processData: false,
+                        data: fileData,
+                        success: function (result) {
+
+                            if (result != "FAIL") {
+
+                                $.ajax({
+                                    url: '/slides/createslide2',
+                                    contentType: 'application/html; charset=utf-8',
+                                    data: { urlimg: result, target: target, sort: sort, link: link, slogan2: slogan2, slogan1: slogan1, title: title, category: category },
+                                    type: 'GET',
+                                    dataType: 'json'
+                                    , success: function (data) {
+
+                                        if (data == "DONE") {
+                                            location.reload();
+                                        }
+                                        else {
+                                            alert("Có lỗi trong quá trình save data !");
+                                        }
+
+                                    },
+                                    error: function (xhr, status) {
+                                        alert("Fail connect to system server. Please try again or check internet connection.");
+                                    },
+                                    complete: function (xhr, status) {
+                                        //loadingstop();
+                                    }
+                                });
+
+                            }
+                        },
+                        error: function (err) {
+                            alert(err.statusText);
+                        }
+                    });
+
+                }
+            }
+
+
+        } else {
+            alert("FormData is not supported.");
+        }
+
+
+    });
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+
+    $(document).on("click", "#btnAddSlide3", function () {
+
+
+        if (window.FormData !== undefined) {
+
+
+            var fileUpload = $("#FileUpload").get(0);
+
+            if (fileUpload.files.length === 0) {
+                alert("Vui lòng chọn file upload !");
+            }
+            else {
+
+                var title = $("#txtTitleSlide").val().trim();
+                var slogan1 = $("#txtSlogan1").val().trim();
+                var slogan2 = $("#txtSlogan2").val().trim();
+                var link = $("#txtLinkBanner").val().trim();
+                var target = $("#slTargetLink").children("option:selected").val().trim();
+                var sort = $("#txtSort").val().trim();
+
+                if (title == "" || slogan1 == "" || slogan2 == "" || link == "" || sort == "") {
+                    alert("Vui lòng điền đầy đủ các trường phía trên");
+                }
+                else {
+
+                    var files = fileUpload.files;
+
+                    var fileData = new FormData();
+
+                    for (var i = 0; i < files.length; i++) {
+                        fileData.append(files[i].name, files[i]);
+                    }
+
+                    fileData.append('username', 'tanthoi');
+
+                    //loadingstart();
+
+                    $.ajax({
+                        url: '/slides/UploadImage',
+                        type: "POST",
+                        contentType: false,
+                        processData: false,
+                        data: fileData,
+                        success: function (result) {
+
+                            if (result != "FAIL") {
+
+                                $.ajax({
+                                    url: '/slides/createslide3',
+                                    contentType: 'application/html; charset=utf-8',
+                                    data: { urlimg: result, target: target, sort: sort, link: link, slogan2: slogan2, slogan1: slogan1, title: title },
+                                    type: 'GET',
+                                    dataType: 'json'
+                                    , success: function (data) {
+
+                                        if (data == "DONE") {
+                                            location.reload();
+                                        }
+                                        else {
+                                            alert("Có lỗi trong quá trình save data !");
+                                        }
+
+                                    },
+                                    error: function (xhr, status) {
+                                        alert("Fail connect to system server. Please try again or check internet connection.");
+                                    },
+                                    complete: function (xhr, status) {
+                                        //loadingstop();
+                                    }
+                                });
+
+                            }
+                        },
+                        error: function (err) {
+                            alert(err.statusText);
+                        }
+                    });
+
+                }
+            }
+
+
+        } else {
+            alert("FormData is not supported.");
+        }
+
+
+    });
 
 });
