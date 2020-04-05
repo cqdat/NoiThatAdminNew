@@ -642,6 +642,7 @@
     <Content Include="Views\CollectionCategories\Create.cshtml" />
     <Content Include="Views\CollectionCategories\Edit.cshtml" />
     <Content Include="Views\Collections\Details.cshtml" />
+    <Content Include="Views\Slides\ForDefault.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
