@@ -48,6 +48,7 @@ namespace NoiThatAdmin.Controllers
 
             h.UploadAndShowResults(CurrentContext, resultList, productid);
 
+
             JsonFiles files = new JsonFiles(resultList);
 
             bool isEmpty = !resultList.Any();
