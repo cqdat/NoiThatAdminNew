@@ -17,6 +17,7 @@ namespace NoiThatAdmin.Controllers
         Helpers h = new Helpers();
 
         // GET: Categories
+        [Authorize]
         public ActionResult Index()
         {
             ViewData["ListCate"] = db.Categories.Where(c => c.TypeCate == WebConstants.CategoryCollection).ToList();
@@ -73,6 +74,8 @@ namespace NoiThatAdmin.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         // GET: Categories/Details/5
+
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -92,6 +95,7 @@ namespace NoiThatAdmin.Controllers
         /// </summary>
         /// <returns></returns>
         // GET: Categories/Create
+        [Authorize]
         public ActionResult Create()
         {
             ViewData["ListCate"] = db.Categories.Where(c => c.TypeCate == WebConstants.CategoryCollection && c.Parent == 0).ToList();
@@ -101,6 +105,7 @@ namespace NoiThatAdmin.Controllers
         // POST: Categories/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "CategoryID,CategoryName,Parent,DisplayMenu,IsActive,Sort,TypeCate,SEOTitle,SEOUrlRewrite,SEOKeywords,SEOMetadescription")] Category category)
@@ -125,6 +130,7 @@ namespace NoiThatAdmin.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         // GET: Categories/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -143,6 +149,7 @@ namespace NoiThatAdmin.Controllers
         // POST: Categories/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "CategoryID,CategoryName,Parent,DisplayMenu,IsActive,Sort,SEOTitle,SEOUrlRewrite,SEOKeywords,SEOMetadescription")] Category category)

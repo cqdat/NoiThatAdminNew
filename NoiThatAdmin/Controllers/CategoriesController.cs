@@ -18,6 +18,7 @@ namespace NoiThatAdmin.Controllers
         Helpers h = new Helpers();
 
         // GET: Categories
+        [Authorize]
         public ActionResult Index()
         {
             ViewData["ListCate"] = db.Categories.Where(c => c.TypeCate == WebConstants.CategoryProduct).ToList();
@@ -68,6 +69,7 @@ namespace NoiThatAdmin.Controllers
             return View(lstCates.ToList().ToPagedList(pageNumber ?? 1, pageSize ?? 2));
         }
         // GET: Categories/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -83,6 +85,7 @@ namespace NoiThatAdmin.Controllers
         }
 
         // GET: Categories/Create
+        [Authorize]
         public ActionResult Create()
         {
             ViewData["ListCate"] = db.Categories.Where(c => c.TypeCate == WebConstants.CategoryProduct && c.Parent == 0).ToList();
@@ -92,6 +95,7 @@ namespace NoiThatAdmin.Controllers
         // POST: Categories/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "CategoryID,CategoryName,Parent,DisplayMenu,IsActive,Sort,TypeCate,SEOTitle,SEOUrlRewrite,SEOKeywords,SEOMetadescription")] Category category)
@@ -111,6 +115,7 @@ namespace NoiThatAdmin.Controllers
         }
 
         // GET: Categories/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -129,6 +134,7 @@ namespace NoiThatAdmin.Controllers
         // POST: Categories/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "CategoryID,CategoryName,Parent,DisplayMenu,IsActive,Sort,SEOTitle,SEOUrlRewrite,SEOKeywords,SEOMetadescription")] Category category)
@@ -145,6 +151,7 @@ namespace NoiThatAdmin.Controllers
         }
 
         // GET: Categories/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -160,6 +167,7 @@ namespace NoiThatAdmin.Controllers
         }
 
         // POST: Categories/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

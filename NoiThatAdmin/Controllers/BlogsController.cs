@@ -17,6 +17,7 @@ namespace NoiThatAdmin.Controllers
     {
         private TanThoiEntities db = new TanThoiEntities();
 
+        [Authorize]
         // GET: Blogs
         public ActionResult Index()
         {
@@ -73,6 +74,7 @@ namespace NoiThatAdmin.Controllers
         }
 
         // GET: Blogs/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -88,6 +90,7 @@ namespace NoiThatAdmin.Controllers
         }
 
         // GET: Blogs/Create
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.CategoryID = new SelectList(db.Categories.Where(c=>c.TypeCate == WebConstants.CategoryNews), "CategoryID", "CategoryName");
@@ -98,6 +101,7 @@ namespace NoiThatAdmin.Controllers
         // POST: Blogs/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
@@ -174,6 +178,7 @@ namespace NoiThatAdmin.Controllers
         // POST: Blogs/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
@@ -233,7 +238,7 @@ namespace NoiThatAdmin.Controllers
                 db.Entry(blog).State = EntityState.Modified;
                 db.SaveChanges();
                 Success(string.Format("Chỉnh sửa thông tin <b>{0}</b> thành công.", ""), true);
-                return RedirectToAction("Index","Blogs");
+                return RedirectToAction("Details","Blogs", new { id = blog.BlogID });
             }
             ViewBag.CategoryID = new SelectList(db.Categories.Where(c => c.TypeCate == WebConstants.CategoryNews), "CategoryID", "CategoryName", blog.CategoryID);
             ViewBag.CreatedBy = new SelectList(db.Users, "UserID", "UserName", blog.CreatedBy);
@@ -241,6 +246,7 @@ namespace NoiThatAdmin.Controllers
         }
 
         // GET: Blogs/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -256,6 +262,7 @@ namespace NoiThatAdmin.Controllers
         }
 
         // POST: Blogs/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

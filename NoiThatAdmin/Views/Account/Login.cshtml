@@ -66,11 +66,9 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
-<!-- Nulled by http://www.baobinh.net by tieulonglanh -->
 <head>
     <meta charset="utf-8">
-    <title>Login</title>
+    <title>Nội Thất Tân Thời - Administrator</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Avant">
@@ -82,42 +80,43 @@
 </head>
 <body class="focusedform">
     <div class="verticalcenter">
-        @*<a href="index.html"><img src="../assets/img/logo.png" alt="Logo" class="brand" /></a>*@
+        
         <div class="panel panel-primary">
 
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="panel-body">
-                    <h4 class="text-center" style="margin-bottom: 25px;">Login Control Panel</h4>
-                 
-                        <div class="form-group">
-                            <div class="col-sm-12">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                    @*<input type="text" class="form-control" id="username" placeholder="@Model.Email">*@
-                                <input class="form-control" data-val="true" data-val-required="The Tài Khoản field is required." placeholder="username" id="Email" name="Email" type="text" value="">
-                                <span class="field-validation-valid text-danger" data-valmsg-for="Email" data-valmsg-replace="true"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-12">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                                    @*<input type="password" class="form-control" id="password" placeholder="@Model.Password">*@
-                                <input class="form-control" data-val="true" data-val-required="The Mật Khẩu field is required." id="Password" placeholder="password" name="Password" type="password">
-                                <span class="field-validation-valid text-danger" data-valmsg-for="Password" data-valmsg-replace="true"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="clearfix">
-                            <div class="pull-right"><label><input type="checkbox" style="margin-bottom: 20px" checked=""> Remember Me</label></div>
-                        </div>
-              
+            <div class="panel-body">
+                @*<a href="index.html"><img src="../assets/img/logo.png" alt="Logo" class="brand" /></a>*@
+                <h4 class="text-center" style="margin-bottom: 25px;">Quản trị Nội Thất Tân Thời</h4>
 
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                            @*<input type="text" class="form-control" id="username" placeholder="@Model.Email">*@
+                            <input class="form-control" data-val="true" data-val-required="The Tài Khoản field is required." placeholder="username" id="Email" name="Email" type="text" value="">
+                            <span class="field-validation-valid text-danger" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
                 </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                            @*<input type="password" class="form-control" id="password" placeholder="@Model.Password">*@
+                            <input class="form-control" data-val="true" data-val-required="The Mật Khẩu field is required." id="Password" placeholder="password" name="Password" type="password">
+                            <span class="field-validation-valid text-danger" data-valmsg-for="Password" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <div class="pull-right"><label><input type="checkbox" style="margin-bottom: 20px" checked=""> Remember Me</label></div>
+                </div>
+
+
+            </div>
                 <div class="panel-footer">
                     @*<a href="extras-forgotpassword.html" class="pull-left btn btn-link" style="padding-left:0">Forgot password?</a>*@
 

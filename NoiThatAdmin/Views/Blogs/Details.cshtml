@@ -19,7 +19,7 @@
     </div>
 </div>
 <div class="container">
-
+    @{ Html.RenderPartial("_Alerts"); }
     <div class="row">
         <div class="col-md-12">
             <div class="tab-container tab-success">
@@ -68,7 +68,7 @@
                                                     <td>Lượt Xem</td>
                                                     <td>@Model.CountView</td>
                                                 </tr>
-                                                
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -85,7 +85,7 @@
                                 </div>
                             </div>
                             <hr>
-                            
+
                         </div>
                     </div>
                     <div class="tab-pane" id="home2">

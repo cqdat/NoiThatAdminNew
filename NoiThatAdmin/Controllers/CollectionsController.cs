@@ -78,7 +78,7 @@ namespace NoiThatAdmin.Controllers
         #endregion
 
         // GET: Products/Create
-        #region Create new product
+        #region Create new Collections
         [Authorize]
         public ActionResult Create()
         {

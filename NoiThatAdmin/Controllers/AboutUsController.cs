@@ -16,6 +16,7 @@ namespace NoiThatAdmin.Controllers
     {
         private TanThoiEntities db = new TanThoiEntities();
         // GET: AboutUs
+        [Authorize]
         public ActionResult Index()
         {
             ViewData["ListCate"] = db.Categories.Where(c => c.TypeCate == WebConstants.CategoryAboutUs).ToList();
@@ -32,11 +33,11 @@ namespace NoiThatAdmin.Controllers
 
             if (pageSize == -1)
             {
-                pageSize = db.Blogs.Where(b => b.TypeBlog == WebConstants.BlogAboutUs).ToList().Count;
+                pageSize = db.Blogs.Where(b => b.TypeBlog == WebConstants.BlogAboutUs || b.TypeBlog == WebConstants.BlogAboutUs_more).ToList().Count;
             }
             ViewBag.PageSize = pageSize;
 
-            var lstprod = db.Blogs.Where(b => b.TypeBlog == WebConstants.BlogAboutUs).OrderBy(b=>b.Sort).ToList();
+            var lstprod = db.Blogs.Where(b => b.TypeBlog == WebConstants.BlogAboutUs || b.TypeBlog == WebConstants.BlogAboutUs_more).OrderBy(b=>b.Sort).ToList();
 
 
 
@@ -167,7 +168,7 @@ namespace NoiThatAdmin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Edit([Bind(Include = "BlogID,BlogName,ImageURL,Content,Sort,CountView,IsActive,CategoryID,SEOTitle,SEOUrlRewrite,SEOKeywords,SEOMetadescription")] Blog blog, HttpPostedFileBase HinhAnh)
+        public ActionResult Edit([Bind(Include = "BlogID,BlogName,ImageURL,Descript,Content,TypeBlog,Sort,CountView,IsActive,CategoryID,SEOTitle,SEOUrlRewrite,SEOKeywords,SEOMetadescription")] Blog blog, HttpPostedFileBase HinhAnh)
         {
             
             if (ModelState.IsValid)
@@ -214,7 +215,7 @@ namespace NoiThatAdmin.Controllers
                         ViewBag.message = "Please choose only Image file";
                     }
                 }
-                blog.TypeBlog = WebConstants.BlogAboutUs;
+                //blog.TypeBlog = WebConstants.BlogAboutUs;
                 blog.SEOUrlRewrite = Helpers.ConvertToUpperLower(blog.BlogName);
                 
                 blog.CreatedBy = db.Users.FirstOrDefault(q => q.UserName == User.Identity.Name).UserID;
