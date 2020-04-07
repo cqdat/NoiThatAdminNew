@@ -102,6 +102,7 @@ namespace NoiThatAdmin.Controllers
                 s.CategoryID = 0;
                 s.CreateBy = db.Users.FirstOrDefault(q => q.UserName == User.Identity.Name).UserID;
                 s.Created = DateTime.Now;
+                s.IsActive = true;
                 db.Slides.Add(s);
                 
                 db.SaveChanges();
@@ -130,6 +131,7 @@ namespace NoiThatAdmin.Controllers
                 s.CategoryID = category;
                 s.CreateBy = db.Users.FirstOrDefault(q => q.UserName == User.Identity.Name).UserID;
                 s.Created = DateTime.Now;
+                s.IsActive = true;
                 db.Slides.Add(s);
 
                 db.SaveChanges();
@@ -159,6 +161,7 @@ namespace NoiThatAdmin.Controllers
                 s.CreateBy = db.Users.FirstOrDefault(q => q.UserName == User.Identity.Name).UserID;
                 s.Created = DateTime.Now;
                 db.Slides.Add(s);
+                s.IsActive = true;
 
                 db.SaveChanges();
                 result = "DONE";
