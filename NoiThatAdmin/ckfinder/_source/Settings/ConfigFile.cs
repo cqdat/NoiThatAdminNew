@@ -66,6 +66,7 @@ namespace CKFinder.Settings
 			LicenseKey = "";
 			BaseUrl = "/ckfinder/userfiles/";
 			BaseDir = "";
+			//BaseDir = "https://localhost:44397/";
 			ForceSingleExtension = true;
 			CheckSizeAfterScaling = true;
 			DisallowUnsafeCharacters = true;

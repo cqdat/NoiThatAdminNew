@@ -17,12 +17,14 @@ namespace NoiThatAdmin.Controllers
         private TanThoiEntities db = new TanThoiEntities();
 
         // GET: Information
+        [Authorize]
         public ActionResult Index()
         {
             return View(db.Information.ToList());
         }
 
         // GET: Information/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -38,6 +40,7 @@ namespace NoiThatAdmin.Controllers
         }
 
         // GET: Information/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -46,6 +49,7 @@ namespace NoiThatAdmin.Controllers
         // POST: Information/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "InfoID,InfoCode,InfoContent")] Information information)
@@ -61,6 +65,7 @@ namespace NoiThatAdmin.Controllers
         }
 
         // GET: Information/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -78,6 +83,7 @@ namespace NoiThatAdmin.Controllers
         // POST: Information/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "InfoID,InfoCode,InfoContent")] Information information)
@@ -92,6 +98,7 @@ namespace NoiThatAdmin.Controllers
         }
 
         // GET: Information/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -107,6 +114,7 @@ namespace NoiThatAdmin.Controllers
         }
 
         // POST: Information/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

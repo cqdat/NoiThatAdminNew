@@ -39,5 +39,6 @@ namespace NoiThatAdmin.Utilities
         public static int BlogNews = 1;
         public static int BlogCollection = 2;
         public static int BlogAboutUs = 4;
+        public static int BlogAboutUs_more = 5;
     }
 }

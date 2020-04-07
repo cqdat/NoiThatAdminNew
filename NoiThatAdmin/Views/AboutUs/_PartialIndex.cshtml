@@ -16,7 +16,7 @@
             <table>
                 <thead>
                     <tr>
-                        
+
                         <th style="width:300px">
                             Tiêu đề
                         </th>
@@ -49,11 +49,10 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-                            
+
                             <td style="width:300px">
-                                <a href="/Blogs/Details/@item.BlogID">
-                                    @item.BlogName
-                                </a>
+
+                                @item.BlogName
                             </td>
                             <td>@item.Sort</td>
                             <td style="width:70px">
@@ -80,8 +79,7 @@
                             </td>
 
                             <td>
-                                @Html.ActionLink("Edit", "Edit", new { id = item.BlogID }) |
-                                @Html.ActionLink("Details", "Details", new { id = item.BlogID })
+                                @Html.ActionLink("Sửa", "Edit", "AboutUs", new { id = item.BlogID }, null)
                             </td>
                         </tr>
                     }

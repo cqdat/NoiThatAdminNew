@@ -17,6 +17,7 @@ namespace NoiThatAdmin.Controllers
         Helpers h = new Helpers();
 
         // GET: BlogCategories
+        [Authorize]
         public ActionResult Index()
         {
             ViewData["ListCate"] = db.Categories.Where(c => c.TypeCate == WebConstants.CategoryNews).ToList();
@@ -67,6 +68,7 @@ namespace NoiThatAdmin.Controllers
             return View(lstCates.ToList().ToPagedList(pageNumber ?? 1, pageSize ?? 2));
         }
 
+        [Authorize]
         /// <summary>
         /// Chi Tiết Loại TIn tức
         /// </summary>
@@ -86,7 +88,7 @@ namespace NoiThatAdmin.Controllers
             return View(category);
         }
 
-
+        [Authorize]
         // GET: Categories/Create
         public ActionResult Create()
         {
@@ -97,6 +99,7 @@ namespace NoiThatAdmin.Controllers
         // POST: Categories/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "CategoryID,CategoryName,Parent,DisplayMenu,IsActive,Sort,TypeCate,SEOTitle,SEOUrlRewrite,SEOKeywords,SEOMetadescription")] Category category)
@@ -117,6 +120,7 @@ namespace NoiThatAdmin.Controllers
 
 
         // GET: Categories/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -135,6 +139,7 @@ namespace NoiThatAdmin.Controllers
         // POST: Categories/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "CategoryID,CategoryName,Parent,DisplayMenu,IsActive,Sort,SEOTitle,SEOUrlRewrite,SEOKeywords,SEOMetadescription")] Category category)

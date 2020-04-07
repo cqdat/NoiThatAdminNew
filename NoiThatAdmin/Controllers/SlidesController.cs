@@ -14,16 +14,20 @@ namespace NoiThatAdmin.Controllers
     {
         TanThoiEntities db = new TanThoiEntities();
         // GET: Slides
+        [Authorize]
         public ActionResult Index()
         {
             return View();
         }
+
+        [Authorize]
         public ActionResult ForHomepage()
         {
             var model = db.Slides.Where(q => q.CategoryID == 0);
             return View(model);
         }
 
+        [Authorize]
         public ActionResult ForCategory()
         {
             var model = new SlideCateViewModel();
