@@ -16,6 +16,7 @@ namespace NoiThatAdmin.Utilities
 
         public static string ImgCollections = ConfigurationManager.AppSettings["ImgCollections"];
         public static string ImgImgCollectionsThumbs = ConfigurationManager.AppSettings["ImgImgCollectionsThumbs"];
+        public static string ImgCollectionsShow = ConfigurationManager.AppSettings["ImgCollectionsShow"];
 
         public static string ImgSlideshow = ConfigurationManager.AppSettings["ImgSlideshow"];
 
