@@ -1,0 +1,150 @@
+﻿@model NoiThatAdmin.Models.DataModels.Advertise
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@using (Html.BeginForm("Create", "Advertises", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div id="page-heading">
+        <ol class="breadcrumb">
+            <li><a href="index.html">Trang chủ</a></li>
+            <li><a href="index.html">Danh sách</a></li>
+            <li class="active">Tạo Mới</li>
+        </ol>
+
+        <h1>Tạo mới Quảng Cáo</h1>
+        <div class="options">
+            <div class="btn-toolbar">
+                <input type="submit" value="Lưu mới" class="btn btn-success" />
+                <a href="/Advertises/Index" class="btn btn-primary">Quay Lại</a>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="background-color:#ffffff">
+        <div class="form-horizontal">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.AdvertiseCode, "Mã định danh", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.AdvertiseCode, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.AdvertiseCode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.AdvertiseName, "Tiêu đề", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.AdvertiseName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.AdvertiseName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.AdvertiseImage, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-9">
+                    <input type="file" id="HinhAnh" name="HinhAnh" />
+                    @Html.ValidationMessageFor(model => model.AdvertiseImage, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.AdvertiseURL, "Đường dẫn chi tiết", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.AdvertiseURL, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.AdvertiseURL, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-4">
+                    <input type="checkbox" id="ckURL" name="ckURL" /> <label id="lblText"></label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.IsActive, "Ẩn/Hiện", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    <div class="checkbox">
+                        <select class="form-control" id="IsActive" name="IsActive">
+                            <option selected="" value="true">Hiện thị</option>
+                            <option value="false">Ẩn</option>
+                        </select>
+                        @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.SEOTitle, "Page Title", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.SEOTitle, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SEOTitle, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.SEOKeywords, "SEO Keywords", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.SEOKeywords, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SEOKeywords, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.SEOMetadescription, "Meta Description", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-9">
+                    <textarea class="form-control" id="SEOMetadescription" name="SEOMetadescription" rows="4"></textarea>
+                    @Html.ValidationMessageFor(model => model.SEOMetadescription, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div id="divContent">
+                <textarea id="AdvContent" name="AdvContent"></textarea>
+            </div>
+
+
+        </div>
+    </div>
+
+}
+
+
+@section scripts{
+    <script src="~/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript" src="~/ckfinder/ckfinder.js"></script>
+    <script type="text/javascript">
+        CKEDITOR.replace("AdvContent",
+            {
+                height: '500px'
+            });
+        CKFinder.setupCKEditor(null, '/ckfinder')
+
+        $(document).ready(function () {
+
+            
+            $("#AdvertiseName").focusout(function () {
+                var BlogName = $("#AdvertiseName").val();
+                $("#SEOTitle").val(BlogName);
+            });
+
+            //
+            $("#AdvertiseURL").show();
+            $("#divContent").hide();
+            $("#lblText").html("Dùng link từ bài viết")
+
+            $("#ckURL").change(function () {
+                if (this.checked) {
+                    //alert("checked");
+                    $("#AdvertiseURL").hide();
+                    $("#divContent").show();
+                    $("#lblText").html("Dùng link từ bên ngoài");
+                }
+                else {
+                    
+                    $("#AdvertiseURL").show();
+                    $("#divContent").hide();
+                    $("#lblText").html("Dùng link từ bài viết");
+                }
+            });
+        });
+    </script>
+
+}
