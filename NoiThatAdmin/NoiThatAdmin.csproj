@@ -177,6 +177,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AboutUsController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdvertisesController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BlogCategoriesController.cs" />
     <Compile Include="Controllers\BlogsController.cs" />
@@ -645,7 +646,11 @@
     <Content Include="Views\Slides\ForDefault.cshtml" />
     <Content Include="Views\Collections\_form.cshtml" />
     <Content Include="Views\Collections\_image.cshtml" />
-    <Content Include="Views\Products\Newest.cshtml" />
+    <Content Include="Views\Advertises\Create.cshtml" />
+    <Content Include="Views\Advertises\Delete.cshtml" />
+    <Content Include="Views\Advertises\Details.cshtml" />
+    <Content Include="Views\Advertises\Edit.cshtml" />
+    <Content Include="Views\Advertises\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

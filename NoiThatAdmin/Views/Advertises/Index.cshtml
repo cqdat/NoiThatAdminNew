@@ -1,0 +1,70 @@
+﻿@model IEnumerable<NoiThatAdmin.Models.DataModels.Advertise>
+@using NoiThatAdmin.Utilities
+@{
+    ViewBag.Title = "Index";
+}
+    <div id="page-heading">
+        <ol class="breadcrumb">
+            <li><a href="index.html">Trang chủ</a></li>
+            <li class="active">Danh sách</li>
+
+        </ol>
+
+        <h1>Thông Tin Chung</h1>
+        <div class="options">
+            <div class="btn-toolbar">
+                <a href="/Advertises/create/" class="btn btn-success btn-label"><i class="fa fa-plus"></i>Thêm mới</a>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="background-color:#ffffff">
+        <div class="col-md-12">
+            <table class="table">
+                <tr>
+                    
+                    <th>
+                        Tiêu đề
+                    </th>
+                    <th>
+                        Hình Ảnh
+                    </th>
+                    
+                    <th>
+                        Ẩn/hiện
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                       
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AdvertiseName)
+                        </td>
+                        <td>
+                            <img style="height:60px" src="@WebConstants.imgNewsURLShow/@item.AdvertiseImage" alt="@item.AdvertiseName" title="@item.AdvertiseName" />
+                        </td>
+                       
+                        <td>
+                            @if (item.IsActive == true)
+                            {
+                                <span class="badge badge-success">Hiện thị</span>
+                            }
+                            else
+                            {
+                                <span class="badge">Ẩn</span>
+                            }
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.AdvertiseID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.AdvertiseID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.AdvertiseID })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+        </div>
+            

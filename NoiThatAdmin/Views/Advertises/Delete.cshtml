@@ -1,0 +1,64 @@
+﻿@model NoiThatAdmin.Models.DataModels.Advertise
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Advertise</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AdvertiseCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdvertiseCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdvertiseName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdvertiseName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdvertiseImage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdvertiseImage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdvertiseURL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdvertiseURL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsActive)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
