@@ -181,7 +181,7 @@ namespace NoiThatAdmin.Models
                         var ThumbfullPath2 = Path.Combine(ThumbfullPath, fileThumb);
                         using (MemoryStream stream = new MemoryStream(System.IO.File.ReadAllBytes(fullPath)))
                         {
-                            var thumbnail = new WebImage(stream).Resize(80, 80);
+                            var thumbnail = new WebImage(stream).Resize(200, 200);
                             thumbnail.Save(ThumbfullPath2, "jpg");
                             URLthumb = ThumbfullPath2;
                         }
@@ -217,7 +217,7 @@ namespace NoiThatAdmin.Models
             ImageHandler handler = new ImageHandler();
 
             var ImageBit = ImageHandler.LoadImage(fullName);
-            handler.Save(ImageBit, 80, 80, 10, ThumbfullPath);
+            handler.Save(ImageBit, 20, 20, 10, ThumbfullPath);
             using (var fs = new FileStream(fullName, FileMode.Append, FileAccess.Write))
             {
                 var buffer = new byte[1024];

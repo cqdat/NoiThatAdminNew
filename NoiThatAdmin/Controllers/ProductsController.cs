@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using NoiThatAdmin.Models;
 using NoiThatAdmin.Models.DataModels;
@@ -154,6 +155,8 @@ namespace NoiThatAdmin.Controllers
 
                         product.Images = myfile;
                         HinhAnh.SaveAs(path);
+
+                        product.ImagesThumb = CreateThumb(myfile);
                     }
                     else
                     {
@@ -182,6 +185,27 @@ namespace NoiThatAdmin.Controllers
             return View(product);
         }
         #endregion
+
+        public string CreateThumb(string myfile )
+        {
+            
+            string pathOnServer = Path.Combine(Server.MapPath(WebConstants.ImgProduct));
+
+            var fullPath = Path.Combine(pathOnServer, Path.GetFileName(myfile));
+            string URLthumb = "";
+            string fileThumb = "";
+            var ThumbfullPath = Path.Combine(pathOnServer, "_thumbs");
+            fileThumb = DateTime.Now.ToString("HHmmss") + "_" + myfile.Remove(myfile.Length - 4, 4) + ".80x80.jpg";
+            var ThumbfullPath2 = Path.Combine(ThumbfullPath, fileThumb);
+            using (MemoryStream stream = new MemoryStream(System.IO.File.ReadAllBytes(fullPath)))
+            {
+                var thumbnail = new WebImage(stream).Resize(200, 200);
+                thumbnail.Save(ThumbfullPath2, "jpg");
+                URLthumb = ThumbfullPath2;
+            }
+
+            return fileThumb;
+        }
 
 
         // GET: Products/Edit/5
