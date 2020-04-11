@@ -10,6 +10,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using NoiThatAdmin.Models;
 using NoiThatAdmin.Models.DataModels;
 using NoiThatAdmin.Utilities;
 using PagedList;
@@ -393,7 +394,23 @@ namespace NoiThatAdmin.Controllers
 
             }
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
 
+        public ActionResult Newest()
+        {
+            var model = db.ProductGroups.Where(q => q.GroupCode == "NEWEST").ToList();
+            return View(model);
+        }
+
+        public JsonResult GetProductGroup(int? productid)
+        {
+            GroupProduct model = new GroupProduct();
+
+            var x = db.ProductGroups.Where(q => q.ProductID == productid).ToList();
+
+            var y = x.FirstOrDefault()
+
+            return Json("", JsonRequestBehavior.AllowGet);
         }
     }
 }

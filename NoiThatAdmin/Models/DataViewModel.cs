@@ -44,4 +44,12 @@ namespace NoiThatAdmin.Models
         public List<Category> categories { get; set; }
         public List<Slide> slides { get; set; }
     }
+
+    public class GroupProduct
+    {
+        public int? SPMoi { get; set; }
+        public int? SPTieuBieu { get; set; }
+        public int? SPNoiBat { get; set; }
+        public int? SPBanChay { get; set; }
+    }
 }

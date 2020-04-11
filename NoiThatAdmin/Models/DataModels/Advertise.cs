@@ -19,6 +19,7 @@ namespace NoiThatAdmin.Models.DataModels
 
         [StringLength(100)]
         public string AdvertiseURL { get; set; }
+        public string AdvContent { get; set; }
 
         public bool? IsActive { get; set; }
     }

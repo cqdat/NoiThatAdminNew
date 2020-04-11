@@ -10,6 +10,12 @@
 
     });
 
+    $(document).on("click", "#btnAddGroupProduct", function () {
+
+        $('#AddGroupProduct').modal({ backdrop: 'static', keyboard: false });
+
+    });
+
     $(document).on("click", ".LockAccount", function() {
 
         var userid = $(this).attr("userid");

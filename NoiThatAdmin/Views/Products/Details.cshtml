@@ -13,6 +13,7 @@
     <h1>Chi tiết</h1>
     <div class="options">
         <div class="btn-toolbar">
+            <a href="javascript:" class="btn btn-warning btn-label" id="btnAddGroupProduct"><i class="fa fa-shopping-cart"></i>Nhóm sản phẩm</a>
             <a href="javascript:" class="btn btn-label btn-info" id="btnUploadImage" productid="@Model.ProductID"><i class="fa fa-upload"></i>Upload ảnh</a>
             <a href="/Products/Edit/@Model.ProductID" class="btn btn-success btn-label"><i class="fa fa-edit"></i>Chỉnh sửa</a>
             <a href="/Products/Index" class="btn btn-primary">Quay Lại</a>
@@ -224,6 +225,27 @@
         </div>
     </div>
 </div>
+
+
+
+<div class="modal fade" id="AddGroupProduct" tabindex="-1" role="dialog" aria-labelledby="AddGroupProduct">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="AddGroupProduct">Nhóm Sản Phẩm</h4>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
 <input type="hidden" id="hdProductIDDetail" value="@Model.ProductID"/>
