@@ -1,0 +1,68 @@
+﻿@using NoiThatAdmin.Utilities
+@model List<NoiThatAdmin.Models.DataModels.ProductGroup>
+@{
+    ViewBag.Title = "Mới nhất";
+}
+
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="/">Trang chủ</a></li>
+        <li class="active">Sản phẩm mới nhất</li>
+
+    </ol>
+
+    <h1>DS Sản phẩm mới nhất</h1>
+    <div class="options">
+        <div class="btn-toolbar">
+            @*<a href="javascript:" class="btn btn-success btn-label" id="btnAddProductGroup"><i class="fa fa-plus"></i>Thêm mới</a>*@
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="col-md-12">
+        <table class="table table-bordered" id="tbslide">
+            <thead>
+                <tr>
+                    <th>
+                        Hình Ảnh
+                    </th>
+                    <th>
+                        Sản Phẩm
+                    </th>                    
+                    <th>
+                        Thể Loại
+                    </th>
+                    <th>
+                        #
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var q in Model)
+                {
+                    <tr>
+                        <td>
+                            <img src="@WebConstants.ImgProductShow/@q.Product.Images" />
+                        </td>
+                        <td>
+                            <a href="#">
+                                @q.Product.ProductName
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#">
+                                @q.Product.Category.CategoryName
+                            </a>
+                        </td>                        
+                        <td>
+                            <a href="javascript:" id="btnxoagroup" groupid="@q.ProductGroupID">Xóa</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+

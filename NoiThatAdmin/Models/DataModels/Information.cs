@@ -15,8 +15,6 @@ namespace NoiThatAdmin.Models.DataModels
         public string InfoCode { get; set; }
         public string InfoTitle { get; set; }
 
-        [StringLength(50)]
-        public string InfoTitle { get; set; }
 
         [StringLength(200)]
         public string InfoContent { get; set; }

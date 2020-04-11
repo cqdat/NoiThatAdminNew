@@ -10,9 +10,105 @@
 
     });
 
+
+    $(document).on("click", "#btnxoagroup", function () {
+
+        var groupid = $(this).attr("groupid");
+
+        var conf = confirm("Bạn có chắc muốn xóa !");
+
+        if (conf) {
+            $.ajax({
+                url: '/products/XoaGroupProduct',
+                contentType: 'application/html; charset=utf-8',
+                data: { groupid: groupid },
+                type: 'GET',
+                dataType: 'json'
+                , success: function (data) {
+
+
+                    if (data == "DONE") {
+
+                        location.reload();
+                    }
+                    else {
+                        alert("Có lỗi khi ghi data lên hệ thống ! Vui lòng thử lại !");
+                    }
+                },
+                error: function (xhr, status) {
+                    alert("Fail connect to system server. Please try again or check internet connection.");
+                },
+                complete: function (xhr, status) {
+
+                }
+            });
+        }
+
+    });
+
+    $(document).on("click", "#btnSaveGroupProduct", function () {
+
+        var groupcode = $(this).attr("groupcode");
+
+        var groupid = $(this).attr("groupid");
+
+        var xaction = $(this).attr("xaction");
+
+        var productid = $("#hdProductIDDetail").val().trim();
+
+
+        $.ajax({
+            url: '/products/SaveGroupProduct',
+            contentType: 'application/html; charset=utf-8',
+            data: { productid: productid, groupcode: groupcode, groupid: groupid, xaction: xaction },
+            type: 'GET',
+            dataType: 'html'
+            , success: function (data) {
+
+                $("#groupcheck").html(data);
+
+
+                $('#AddGroupProduct').modal({ backdrop: 'static', keyboard: false });
+
+            },
+            error: function (xhr, status) {
+                alert("Fail connect to system server. Please try again or check internet connection.");
+            },
+            complete: function (xhr, status) {
+
+            }
+        });
+
+    });
+
     $(document).on("click", "#btnAddGroupProduct", function () {
 
-        $('#AddGroupProduct').modal({ backdrop: 'static', keyboard: false });
+        var hdProductIDDetail = $("#hdProductIDDetail").val().trim();
+
+        $.ajax({
+            url: '/products/GetGroupProduct',
+            contentType: 'application/html; charset=utf-8',
+            data: { productid: hdProductIDDetail },
+            type: 'GET',
+            dataType: 'html'
+            , success: function (data) {
+
+                $("#groupcheck").html(data);
+
+
+                $('#AddGroupProduct').modal({ backdrop: 'static', keyboard: false });
+               
+            },
+            error: function (xhr, status) {
+                alert("Fail connect to system server. Please try again or check internet connection.");
+            },
+            complete: function (xhr, status) {
+
+            }
+        });
+
+
+        
 
     });
 

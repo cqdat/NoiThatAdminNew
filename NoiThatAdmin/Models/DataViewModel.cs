@@ -47,9 +47,14 @@ namespace NoiThatAdmin.Models
 
     public class GroupProduct
     {
-        public int? SPMoi { get; set; }
-        public int? SPTieuBieu { get; set; }
-        public int? SPNoiBat { get; set; }
-        public int? SPBanChay { get; set; }
+        public string Title { get; set; }
+        public int GroupID { get; set; }
+        public int? IsGroup { get; set; }
+    }
+
+    public class GroupCheck
+    {
+        public List<GroupProduct> allows { get; set; }
+        public List<GroupProduct> available { get; set; }
     }
 }

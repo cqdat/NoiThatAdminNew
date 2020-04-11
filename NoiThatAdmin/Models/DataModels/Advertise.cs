@@ -26,8 +26,6 @@ namespace NoiThatAdmin.Models.DataModels
 
         public bool? IsActive { get; set; }
 
-        public string AdvContent { get; set; }
-
         [StringLength(200)]
         public string SEOTitle { get; set; }
 

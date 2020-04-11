@@ -651,6 +651,11 @@
     <Content Include="Views\Advertises\Details.cshtml" />
     <Content Include="Views\Advertises\Edit.cshtml" />
     <Content Include="Views\Advertises\Index.cshtml" />
+    <Content Include="Views\Products\MoiNhat.cshtml" />
+    <Content Include="Views\Products\_group.cshtml" />
+    <Content Include="Views\Products\TieuBieu.cshtml" />
+    <Content Include="Views\Products\BanChay.cshtml" />
+    <Content Include="Views\Products\NoiBat.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

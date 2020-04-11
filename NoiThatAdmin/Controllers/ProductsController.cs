@@ -396,21 +396,177 @@ namespace NoiThatAdmin.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Newest()
+        public ActionResult MoiNhat()
         {
-            var model = db.ProductGroups.Where(q => q.GroupCode == "NEWEST").ToList();
+            var model = db.ProductGroups.Where(q => q.GroupCode == 1).ToList();
             return View(model);
         }
 
-        public JsonResult GetProductGroup(int? productid)
+        public ActionResult TieuBieu()
         {
-            GroupProduct model = new GroupProduct();
+            var model = db.ProductGroups.Where(q => q.GroupCode == 2).ToList();
+            return View(model);
+        }
+
+        public ActionResult NoiBat()
+        {
+            var model = db.ProductGroups.Where(q => q.GroupCode == 3).ToList();
+            return View(model);
+        }
+
+        public ActionResult BanChay()
+        {
+            var model = db.ProductGroups.Where(q => q.GroupCode == 4).ToList();
+            return View(model);
+        }
+
+        public GroupCheck GroupCheck(int? productid)
+        {
+            GroupCheck model = new GroupCheck();
 
             var x = db.ProductGroups.Where(q => q.ProductID == productid).ToList();
 
-            var y = x.FirstOrDefault()
+            List<GroupProduct> allows = new List<GroupProduct>();
+            List<GroupProduct> available = new List<GroupProduct>();
 
-            return Json("", JsonRequestBehavior.AllowGet);
+            var y = x.FirstOrDefault(q => q.GroupCode == 1); // mới nhất
+
+            GroupProduct g1 = new GroupProduct();
+            g1.Title = "Sản Phẩm Mới Nhất";
+            g1.GroupID = 0;
+            g1.IsGroup = 1;
+
+            if (y != null)
+            {
+                g1.GroupID = y.ProductGroupID;
+
+                allows.Add(g1);
+            }
+            else
+            {
+                available.Add(g1);
+            }
+
+            var y2 = x.FirstOrDefault(q => q.GroupCode == 2); /// tiêu biểu
+
+            GroupProduct g2 = new GroupProduct();
+            g2.Title = "Sản Phẩm Tiêu Biểu";
+            g2.GroupID = 0;
+            g2.IsGroup = 2;
+
+            if (y2 != null)
+            {
+                g2.GroupID = y2.ProductGroupID;
+
+                allows.Add(g2);
+            }
+            else
+            {
+                available.Add(g2);
+            }
+
+            var y3 = x.FirstOrDefault(q => q.GroupCode == 3); //nổi bật
+
+            GroupProduct g3 = new GroupProduct();
+            g3.Title = "Sản Phẩm Nổi Bật";
+            g3.GroupID = 0;
+            g3.IsGroup = 3;
+
+            if (y3 != null)
+            {
+                g3.GroupID = y3.ProductGroupID;
+
+                allows.Add(g3);
+            }
+            else
+            {
+                available.Add(g3);
+            }
+
+            var y4 = x.FirstOrDefault(q => q.GroupCode == 4); /// bán chạy
+
+            GroupProduct g4 = new GroupProduct();
+            g4.Title = "Sản Phẩm Bán Chạy";
+            g4.GroupID = 0;
+            g4.IsGroup = 4;
+            if (y4 != null)
+            {
+                g4.GroupID = y4.ProductGroupID;
+
+                allows.Add(g4);
+            }
+            else
+            {
+                available.Add(g4);
+            }
+
+            model.allows = allows;
+            model.available = available;
+
+
+            return model;
+        }
+
+        public PartialViewResult GetGroupProduct(int? productid)
+        {
+            GroupCheck model = new GroupCheck();
+
+            model = GroupCheck(productid);
+
+            return PartialView("_group", model);
+        }
+
+
+        public PartialViewResult SaveGroupProduct(int? groupid, int? productid, int? xaction, int? groupcode)
+        {
+            if(xaction == 0) // xóa
+            {
+                var gr = db.ProductGroups.Find(groupid);
+
+                db.ProductGroups.Remove(gr);
+
+                db.SaveChanges();
+            }
+            else // thêm
+            {
+                var gr = new ProductGroup();
+                gr.GroupCode = groupcode;
+                gr.ProductID = productid;
+                gr.Sort = 1;
+
+                db.ProductGroups.Add(gr);
+
+                db.SaveChanges();
+            }
+
+
+            GroupCheck model = new GroupCheck();
+
+            model = GroupCheck(productid);
+
+            return PartialView("_group", model);
+        }
+
+        public JsonResult XoaGroupProduct(int? groupid)
+        {
+            string result = "FAIL";
+
+            try
+            {
+                var q = db.ProductGroups.Find(groupid);
+
+                db.ProductGroups.Remove(q);
+
+                db.SaveChanges();
+
+                result = "DONE";
+            }
+            catch
+            {
+
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

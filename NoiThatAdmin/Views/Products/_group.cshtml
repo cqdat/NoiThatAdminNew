@@ -1,0 +1,59 @@
+﻿@model NoiThatAdmin.Models.GroupCheck
+
+    <div class="row">
+        <div class="col-md-6">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>
+                            Loại
+                        </th>
+                        <th>
+                            #
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var q in Model.allows)
+                    {
+                        <tr>
+                            <td>
+                                @q.Title
+                            </td>
+                            <td>
+                                <a href="javascript:" groupid="@q.GroupID" groupcode="@q.IsGroup" id="btnSaveGroupProduct" xaction="0">Xóa</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-6">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>
+                            Loại
+                        </th>
+                        <th>
+                            #
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var q in Model.available)
+                    {
+                        <tr>
+                            <td>
+                                @q.Title
+                            </td>
+                            <td>
+                                <a href="javascript:" groupid="@q.GroupID" groupcode="@q.IsGroup" id="btnSaveGroupProduct" xaction="1">Thêm</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>

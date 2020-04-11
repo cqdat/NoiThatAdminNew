@@ -13,8 +13,7 @@ namespace NoiThatAdmin.Models.DataModels
 
         public int? ProductID { get; set; }
 
-        [StringLength(6)]
-        public string GroupCode { get; set; }
+        public int? GroupCode { get; set; }
 
         public int? Sort { get; set; }
 
