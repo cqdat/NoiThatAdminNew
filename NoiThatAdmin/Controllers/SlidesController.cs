@@ -66,7 +66,11 @@ namespace NoiThatAdmin.Controllers
                         }
                         else
                         {
-                            fname = DateTime.Now.ToString("HHmmssddMMyyyy") + "_" + file.FileName;
+                            var fileName = Path.GetFileName(file.FileName);
+                            var ext = Path.GetExtension(file.FileName);
+                            string name = Path.GetFileNameWithoutExtension(fileName); //getting file name without extension  
+                            //fname = file.FileName + "-" + DateTime.Now.ToString("HHmmssddMMyyyy");
+                            fname = name + "_" + DateTime.Now.Millisecond + ext;
 
                             x = fname;
                         }
