@@ -28,8 +28,8 @@ namespace NoiThatAdmin.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            ViewData["ListCateParent"] = db.Categories.Where(c => c.Parent == 0).ToList();
-            ViewData["ListCate"] = db.Categories.Where(c => c.Parent != 0).ToList();
+            ViewData["ListCateParent"] = db.Categories.Where(c => c.Parent == 0 && c.TypeCate == WebConstants.CategoryProduct).ToList();
+            ViewData["ListCate"] = db.Categories.Where(c => c.Parent != 0 && c.TypeCate == WebConstants.CategoryProduct).ToList();
             return View();
         }
         public ActionResult _PartialIndex(int? pageNumber, int? pageSize, string MaSP, string SanPham, int? DanhMucCha, int? DanhMucCon,
@@ -114,8 +114,8 @@ namespace NoiThatAdmin.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            ViewBag.CategoryIDParent = new SelectList(db.Categories.Where(c => c.Parent == 0), "CategoryID", "CategoryName");
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName");
+            ViewBag.CategoryIDParent = new SelectList(db.Categories.Where(c => c.Parent == 0 && c.TypeCate == WebConstants.CategoryProduct), "CategoryID", "CategoryName");
+            ViewBag.CategoryID = new SelectList(db.Categories.Where(c=> c.TypeCate == WebConstants.CategoryProduct), "CategoryID", "CategoryName");
             ViewBag.CreatedBy = new SelectList(db.Users, "UserID", "UserName");
             return View();
         }
@@ -222,8 +222,8 @@ namespace NoiThatAdmin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoryIDParent = new SelectList(db.Categories.Where(c => c.Parent == 0), "CategoryID", "CategoryName", product.CategoryIDParent);
-            ViewBag.CategoryID = new SelectList(db.Categories.Where(c => c.Parent == product.CategoryIDParent), "CategoryID", "CategoryName", product.CategoryID);
+            ViewBag.CategoryIDParent = new SelectList(db.Categories.Where(c => c.Parent == 0 && c.TypeCate == WebConstants.CategoryProduct), "CategoryID", "CategoryName", product.CategoryIDParent);
+            ViewBag.CategoryID = new SelectList(db.Categories.Where(c => c.Parent == product.CategoryIDParent && c.TypeCate == WebConstants.CategoryProduct), "CategoryID", "CategoryName", product.CategoryID);
             ViewBag.CreatedBy = new SelectList(db.Users, "UserID", "UserName", product.CreatedBy);
             return View(product);
         }
