@@ -36,10 +36,16 @@ namespace NoiThatAdmin.Utilities
         public static int CategoryCollection = 2;
         public static int CategoryNews = 3;
         public static int CategoryAboutUs = 4;
+        public static int CategoryService = 5;
 
         public static int BlogNews = 1;
         public static int BlogCollection = 2;
         public static int BlogAboutUs = 4;
         public static int BlogAboutUs_more = 5;
+
+        public static int ProductMoi = 1;
+        public static int ProductNoiBat = 2;
+        public static int ProductBanChay = 3;
+        public static int ProductDangKM = 4;
     }
 }

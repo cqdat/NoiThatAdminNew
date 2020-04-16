@@ -21,7 +21,7 @@ namespace NoiThatAdmin.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            ViewData["ListCate"] = db.Categories.Where(c => c.TypeCate == WebConstants.CategoryProduct).ToList();
+            ViewData["ListCate"] = db.Categories.Where(c => c.TypeCate == WebConstants.CategoryProduct && c.Parent == 0).ToList();
             return View();
         }
 
