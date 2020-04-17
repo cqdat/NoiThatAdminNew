@@ -422,25 +422,25 @@ namespace NoiThatAdmin.Controllers
 
         public ActionResult MoiNhat()
         {
-            var model = db.ProductGroups.Where(q => q.GroupCode == 1).ToList();
+            var model = db.ProductGroups.Where(q => q.GroupCode == WebConstants.ProductMoi).ToList();
             return View(model);
         }
 
         public ActionResult TieuBieu()
         {
-            var model = db.ProductGroups.Where(q => q.GroupCode == 2).ToList();
+            var model = db.ProductGroups.Where(q => q.GroupCode == WebConstants.ProductNoiBat).ToList();
             return View(model);
         }
 
         public ActionResult NoiBat()
         {
-            var model = db.ProductGroups.Where(q => q.GroupCode == 3).ToList();
+            var model = db.ProductGroups.Where(q => q.GroupCode == WebConstants.ProductDangKM).ToList();
             return View(model);
         }
 
         public ActionResult BanChay()
         {
-            var model = db.ProductGroups.Where(q => q.GroupCode == 4).ToList();
+            var model = db.ProductGroups.Where(q => q.GroupCode == WebConstants.ProductBanChay).ToList();
             return View(model);
         }
 
