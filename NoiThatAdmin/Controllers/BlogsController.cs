@@ -93,7 +93,7 @@ namespace NoiThatAdmin.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            ViewBag.CategoryID = new SelectList(db.Categories.Where(c=>c.TypeCate == WebConstants.CategoryNews), "CategoryID", "CategoryName");
+            ViewBag.CategoryID = new SelectList(db.Categories.Where(c => c.TypeCate == WebConstants.CategoryNews || c.TypeCate == WebConstants.CategoryService), "CategoryID", "CategoryName");
             ViewBag.CreatedBy = new SelectList(db.Users, "UserID", "UserName");
             return View();
         }
