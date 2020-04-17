@@ -474,7 +474,7 @@ namespace NoiThatAdmin.Controllers
             var y2 = x.FirstOrDefault(q => q.GroupCode == 2); /// tiêu biểu
 
             GroupProduct g2 = new GroupProduct();
-            g2.Title = "Sản Phẩm Tiêu Biểu";
+            g2.Title = "Sản Phẩm Đang Khuyến Mãi";
             g2.GroupID = 0;
             g2.IsGroup = 2;
 
