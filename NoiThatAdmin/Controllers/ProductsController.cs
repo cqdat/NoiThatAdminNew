@@ -453,7 +453,7 @@ namespace NoiThatAdmin.Controllers
             List<GroupProduct> allows = new List<GroupProduct>();
             List<GroupProduct> available = new List<GroupProduct>();
 
-            var y = x.FirstOrDefault(q => q.GroupCode == 1); // mới nhất
+            var y = x.FirstOrDefault(q => q.GroupCode == WebConstants.ProductMoi); // mới nhất
 
             GroupProduct g1 = new GroupProduct();
             g1.Title = "Sản Phẩm Mới Nhất";
@@ -471,7 +471,7 @@ namespace NoiThatAdmin.Controllers
                 available.Add(g1);
             }
 
-            var y2 = x.FirstOrDefault(q => q.GroupCode == 2); /// tiêu biểu
+            var y2 = x.FirstOrDefault(q => q.GroupCode == WebConstants.ProductDangKM); /// khuyến mãi
 
             GroupProduct g2 = new GroupProduct();
             g2.Title = "Sản Phẩm Đang Khuyến Mãi";
@@ -489,7 +489,7 @@ namespace NoiThatAdmin.Controllers
                 available.Add(g2);
             }
 
-            var y3 = x.FirstOrDefault(q => q.GroupCode == 3); //nổi bật
+            var y3 = x.FirstOrDefault(q => q.GroupCode == WebConstants.ProductNoiBat); //nổi bật
 
             GroupProduct g3 = new GroupProduct();
             g3.Title = "Sản Phẩm Nổi Bật";
@@ -507,7 +507,7 @@ namespace NoiThatAdmin.Controllers
                 available.Add(g3);
             }
 
-            var y4 = x.FirstOrDefault(q => q.GroupCode == 4); /// bán chạy
+            var y4 = x.FirstOrDefault(q => q.GroupCode == WebConstants.ProductBanChay); /// bán chạy
 
             GroupProduct g4 = new GroupProduct();
             g4.Title = "Sản Phẩm Bán Chạy";
