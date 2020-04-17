@@ -428,13 +428,13 @@ namespace NoiThatAdmin.Controllers
 
         public ActionResult TieuBieu()
         {
-            var model = db.ProductGroups.Where(q => q.GroupCode == WebConstants.ProductNoiBat).ToList();
+            var model = db.ProductGroups.Where(q => q.GroupCode == WebConstants.ProductDangKM).ToList();
             return View(model);
         }
 
         public ActionResult NoiBat()
         {
-            var model = db.ProductGroups.Where(q => q.GroupCode == WebConstants.ProductDangKM).ToList();
+            var model = db.ProductGroups.Where(q => q.GroupCode == WebConstants.ProductNoiBat).ToList();
             return View(model);
         }
 
