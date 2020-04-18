@@ -63,13 +63,24 @@
 
             <div class="form-group">
                 @Html.LabelFor(model => model.IsActive, "Ẩn/Hiện", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="checkbox">
                         <select class="form-control" id="IsActive" name="IsActive">
                             <option selected="" value="true">Hiện thị</option>
                             <option value="false">Ẩn</option>
                         </select>
                         @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                @Html.LabelFor(model => model.Location, "Vị Trí", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    <div class="checkbox">
+                        <select class="form-control" id="Location" name="Location">
+                            <option selected value="1">Trang Chủ (Banner)</option>
+                            <option value="2">Trang Chủ (Bottom)</option>
+                            <option value="3">Các trang con</option>
+                        </select>
+                        @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>

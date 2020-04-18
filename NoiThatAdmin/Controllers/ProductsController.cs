@@ -46,7 +46,7 @@ namespace NoiThatAdmin.Controllers
             }
             ViewBag.PageSize = pageSize;
 
-            var lstprod = db.Products.Where(p => p.IsProduct == true).ToList();
+            var lstprod = db.Products.Where(p => p.IsProduct == true).OrderByDescending(p=>p.ProductID).ToList();
 
             if (!string.IsNullOrEmpty(MaSP))
             {
@@ -78,7 +78,7 @@ namespace NoiThatAdmin.Controllers
             }
             ViewBag.SEOKeywords = SEOKeywords;
 
-            lstprod = lstprod.OrderBy(s => s.Created).ToList();
+            lstprod = lstprod.OrderByDescending(p => p.ProductID).ToList();
             ViewBag.STT = pageNumber * pageSize - pageSize + 1;
             int count = lstprod.ToList().Count();
             ViewBag.TotalRow = count;
@@ -174,15 +174,15 @@ namespace NoiThatAdmin.Controllers
                 db.Products.Add(product);
                 db.SaveChanges();
                 Success(string.Format("Thêm mới sản phẩm<b>{0}</b> thành công.", product.ProductName), true);
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Products", new { id = product.ProductID });
             }
 
             ViewBag.CategoryIDParent = new SelectList(db.Categories.Where(c => c.Parent == 0), "CategoryID", "CategoryName", product.CategoryIDParent);
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", product.CategoryID);
             ViewBag.CreatedBy = new SelectList(db.Users, "UserID", "UserName", product.CreatedBy);
             Success(string.Format("Thêm mới sản phẩm<b>{0}</b> thành công.", product.ProductName), true);
-            //return RedirectToAction("Index");
-            return View(product);
+            return RedirectToAction("Details", "Products", new { id = product.ProductID });
+            //return View(product);
         }
         #endregion
 
