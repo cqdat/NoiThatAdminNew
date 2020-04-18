@@ -50,7 +50,7 @@ namespace NoiThatAdmin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Create([Bind(Include = "AdvertiseID,AdvertiseCode,AdvertiseName,AdvertiseImage,AdvertiseURL,IsActive,AdvContent,SEOTitle," +
+        public ActionResult Create([Bind(Include = "AdvertiseID,AdvertiseCode,AdvertiseName,AdvertiseImage,AdvertiseURL,IsActive,Location,AdvContent,SEOTitle," +
             "SEOUrlRewrite,SEOKeywords,SEOMetadescription")] Advertise advertise,
             HttpPostedFileBase HinhAnh)
         {
