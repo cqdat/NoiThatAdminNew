@@ -182,6 +182,7 @@
     <Compile Include="Controllers\BlogCategoriesController.cs" />
     <Compile Include="Controllers\BlogsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\CategoryImageController.cs" />
     <Compile Include="Controllers\CollectionCategoriesController.cs" />
     <Compile Include="Controllers\CollectionsController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
@@ -209,6 +210,7 @@
     <Compile Include="Models\DataModels\Product.cs" />
     <Compile Include="Models\DataModels\ProductGroup.cs" />
     <Compile Include="Models\DataModels\ProductImage.cs" />
+    <Compile Include="Models\DataModels\ProductImageCategory.cs" />
     <Compile Include="Models\DataModels\ProductRating.cs" />
     <Compile Include="Models\DataModels\ProductTab.cs" />
     <Compile Include="Models\DataModels\Role.cs" />
@@ -217,6 +219,7 @@
     <Compile Include="Models\DataModels\TanThoiEntities.cs" />
     <Compile Include="Models\DataModels\User.cs" />
     <Compile Include="Models\DataViewModel.cs" />
+    <Compile Include="Models\FilesHelper2.cs" />
     <Compile Include="Models\FilesHelper.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ImageHandler.cs" />
@@ -657,9 +660,11 @@
     <Content Include="Views\Products\TieuBieu.cshtml" />
     <Content Include="Views\Products\BanChay.cshtml" />
     <Content Include="Views\Products\NoiBat.cshtml" />
+    <Content Include="Views\CategoryImage\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Photos\Category\_thumbs\" />
     <Folder Include="Photos\Collections\_thumbs\" />
     <Folder Include="Photos\LogosCust\" />
     <Folder Include="Photos\News\" />

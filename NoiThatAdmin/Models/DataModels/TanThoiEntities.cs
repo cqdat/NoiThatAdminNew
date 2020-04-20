@@ -25,6 +25,7 @@ namespace NoiThatAdmin.Models.DataModels
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductGroup> ProductGroups { get; set; }
         public virtual DbSet<ProductImage> ProductImages { get; set; }
+        public virtual DbSet<ProductImageCategory> ProductImageCategories { get; set; }
         public virtual DbSet<ProductRating> ProductRatings { get; set; }
         public virtual DbSet<ProductTab> ProductTabs { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
@@ -40,6 +41,14 @@ namespace NoiThatAdmin.Models.DataModels
 
             modelBuilder.Entity<Advertise>()
                 .Property(e => e.AdvertiseURL)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Advertise>()
+                .Property(e => e.AdvertiseCode)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Advertise>()
+                .Property(e => e.SEOUrlRewrite)
                 .IsUnicode(false);
 
             modelBuilder.Entity<BlogComment>()
@@ -64,6 +73,16 @@ namespace NoiThatAdmin.Models.DataModels
                 .WithOptional(e => e.Category1)
                 .HasForeignKey(e => e.CategoryID);
 
+            modelBuilder.Entity<Category>()
+                .HasMany(e => e.ProductImageCategories)
+                .WithOptional(e => e.Category)
+                .HasForeignKey(e => e.CategoryIDParent);
+
+            modelBuilder.Entity<Category>()
+                .HasMany(e => e.ProductImageCategories1)
+                .WithOptional(e => e.Category1)
+                .HasForeignKey(e => e.CategoryID);
+
             modelBuilder.Entity<Customer>()
                 .Property(e => e.CustomerImage)
                 .IsUnicode(false);
@@ -74,6 +93,10 @@ namespace NoiThatAdmin.Models.DataModels
 
             modelBuilder.Entity<CustomerContact>()
                 .Property(e => e.CustomerPhone)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Information>()
+                .Property(e => e.InfoCode)
                 .IsUnicode(false);
 
             modelBuilder.Entity<MenuImage>()
@@ -104,13 +127,19 @@ namespace NoiThatAdmin.Models.DataModels
                 .Property(e => e.SEOUrlRewrite)
                 .IsUnicode(false);
 
-          
-
             modelBuilder.Entity<ProductImage>()
                 .Property(e => e.URLImage)
                 .IsUnicode(false);
 
             modelBuilder.Entity<ProductImage>()
+                .Property(e => e.ImagesThumb)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ProductImageCategory>()
+                .Property(e => e.URLImage)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ProductImageCategory>()
                 .Property(e => e.ImagesThumb)
                 .IsUnicode(false);
 

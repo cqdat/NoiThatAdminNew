@@ -15,6 +15,8 @@ namespace NoiThatAdmin.Models.DataModels
             Blogs = new HashSet<Blog>();
             Products = new HashSet<Product>();
             Products1 = new HashSet<Product>();
+            ProductImageCategories = new HashSet<ProductImageCategory>();
+            ProductImageCategories1 = new HashSet<ProductImageCategory>();
         }
 
         public int CategoryID { get; set; }
@@ -51,5 +53,11 @@ namespace NoiThatAdmin.Models.DataModels
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Products1 { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProductImageCategory> ProductImageCategories { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProductImageCategory> ProductImageCategories1 { get; set; }
     }
 }

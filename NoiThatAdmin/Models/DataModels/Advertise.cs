@@ -11,9 +11,6 @@ namespace NoiThatAdmin.Models.DataModels
     {
         public int AdvertiseID { get; set; }
 
-        [StringLength(5)]
-        public string AdvertiseCode { get; set; }
-
         [StringLength(100)]
         public string AdvertiseName { get; set; }
 
@@ -22,10 +19,15 @@ namespace NoiThatAdmin.Models.DataModels
 
         [StringLength(100)]
         public string AdvertiseURL { get; set; }
+
         public string AdvContent { get; set; }
 
         public bool? IsActive { get; set; }
+
         public int? Location { get; set; }
+
+        [StringLength(5)]
+        public string AdvertiseCode { get; set; }
 
         [StringLength(200)]
         public string SEOTitle { get; set; }
@@ -36,7 +38,7 @@ namespace NoiThatAdmin.Models.DataModels
         [StringLength(200)]
         public string SEOKeywords { get; set; }
 
-        [StringLength(500)]
+        [StringLength(400)]
         public string SEOMetadescription { get; set; }
     }
 }

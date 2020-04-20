@@ -11,6 +11,78 @@
     });
 
 
+    $(document).on("change", "#ParentSelect", function () {
+
+        var cateid = $(this).children("option:selected").val();
+
+
+        if (cateid > 0) {
+            $.ajax({
+                url: '/CategoryImage/GetChildCategory',
+                contentType: 'application/json; charset=utf-8',
+                data: { cateid: cateid },
+                type: 'GET',
+                dataType: 'json'
+                , success: function (data) {
+
+
+                    $("#ChildSelect").empty();
+
+                    var html = "<option value=0>-- Chọn loại sản phẩm con --</option>"
+
+                    $.each(data, function (id, dt) {
+                  
+                        html += "<option value=" + dt.CateID + ">" + dt.CateName + "</option>";
+                      
+                    });
+
+
+                    $("#ChildSelect").html(html);
+
+                    $("#parentid").val(cateid);
+
+                    $("#FormUpload").hide();
+
+
+                },
+                error: function (xhr, status) {
+                    alert("Fail connect to system server. Please try again or check internet connection.");
+                },
+                complete: function (xhr, status) {
+
+                }
+            });
+        }
+        else {
+            $("#ChildSelect").empty();
+
+            var html = "<option value=0>-- Chọn loại sản phẩm con --</option>"
+
+            $("#ChildSelect").html(html);
+
+            $("#FormUpload").hide();
+        }
+
+
+    });
+
+    $(document).on("change", "#ChildSelect", function () {
+
+        var cateid = $(this).children("option:selected").val();
+
+        if (cateid > 0) {
+            $("#childid").val(cateid);
+            $("#FormUpload").show();
+
+        }
+        else {
+            $("#FormUpload").hide();
+        }
+
+
+    });
+
+
     $(document).on("click", "#btnxoagroup", function () {
 
         var groupid = $(this).attr("groupid");
