@@ -160,7 +160,7 @@ namespace NoiThatAdmin.Models
                 string fileThumb = "";
 
 
-                guid = Guid.NewGuid().ToString();
+                guid = DateTime.Now.ToString("HHmmss");//Guid.NewGuid().ToString();
 
                 var fullPath = Path.Combine(pathOnServer, Path.GetFileName(guid + "_" + file.FileName));
 
