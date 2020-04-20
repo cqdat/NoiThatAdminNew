@@ -711,14 +711,4 @@
 
 
 var $form = null;
-$(function () {
-
-    $form = $('#fileupload').fileupload({
-        dataType: 'json',
-        maxFileSize: 20000000, 
-        maxNumberOfFiles: 10,  
-        acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i
-    });
-
-});
 
