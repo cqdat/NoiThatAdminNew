@@ -20,7 +20,8 @@ namespace NoiThatAdmin.Controllers
         public ActionResult Index()
         {
             var model = new UserViewModel();
-            model.users = db.Users.ToList();
+            model.users = db.Users.Where(u=>u.UserName != "dannycao").ToList();
+            //model.users = db.Users.ToList();
             model.roles = db.Roles.ToList();
             model.permissions = db.Permissions.ToList();
             return View(model);

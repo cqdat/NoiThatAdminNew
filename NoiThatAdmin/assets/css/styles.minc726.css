@@ -6101,8 +6101,8 @@ i.visible-print {
 
 /*@font-face {
     font-family: 'FontAwesome';
-    src: url('../fonts/font-awesome/fonts/fontawesome-webfont862f.eot?v=4.1.0');
-    src: url('../fonts/font-awesome/fonts/fontawesome-webfontd41d.eot?#iefix&v=4.1.0') format('embedded-opentype'), url('../fonts/font-awesome/fonts/fontawesome-webfont862f.woff?v=4.1.0') format('woff'), url('../fonts/font-awesome/fonts/fontawesome-webfont862f.ttf?v=4.1.0') format('truetype'), url('../fonts/font-awesome/fonts/fontawesome-webfont862f.svg?v=4.1.0#fontawesomeregular') format('svg');
+    src: url('../assets/fonts/font-awesome/fonts/fontawesome-webfont862f.eot?v=4.1.0');
+    src: url('../assets/fonts/font-awesome/fonts/fontawesome-webfontd41d.eot?#iefix&v=4.1.0') format('embedded-opentype'), url('../assets/fonts/font-awesome/fonts/fontawesome-webfont862f.woff?v=4.1.0') format('woff'), url('../assets/fonts/font-awesome/fonts/fontawesome-webfont862f.ttf?v=4.1.0') format('truetype'), url('../assets/fonts/font-awesome/fonts/fontawesome-webfont862f.svg?v=4.1.0#fontawesomeregular') format('svg');
     font-weight: normal;
     font-style: normal;
 }*/
