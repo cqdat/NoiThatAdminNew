@@ -41,7 +41,7 @@
 
                     $("#parentid").val(cateid);
 
-                    $("#FormUpload").hide();
+                    $("#FormUpload").show();
 
 
                 },
@@ -70,14 +70,14 @@
 
         var cateid = $(this).children("option:selected").val();
 
-        if (cateid > 0) {
-            $("#childid").val(cateid);
-            $("#FormUpload").show();
+        //if (cateid > 0) {
+        //    $("#childid").val(cateid);
+        //    $("#FormUpload").show();
 
-        }
-        else {
-            $("#FormUpload").hide();
-        }
+        //}
+        //else {
+        //    $("#FormUpload").hide();
+        //}
 
 
     });

@@ -193,7 +193,10 @@ namespace NoiThatAdmin.Models
                 img.Created = DateTime.Now;
                 img.ImagesThumb = fileThumb;
                 img.CategoryIDParent = parentid;
-                img.CategoryID = childid;
+                if(childid > 0)
+                {
+                    img.CategoryID = childid;
+                }                
                 img.Title = file.FileName.Substring(0, file.FileName.Length - 4);
                 img.URLImage = guid + "_" + file.FileName;
                 db.ProductImageCategories.Add(img);
