@@ -41,6 +41,12 @@ namespace NoiThatAdmin.Controllers
         }
 
 
+        [Authorize]
+        public ActionResult LstCategoryImages()
+        {
+            return View();
+        }
+
 
         public JsonResult GetChildCategory(int? cateid)
         {
@@ -87,5 +93,7 @@ namespace NoiThatAdmin.Controllers
             h.DeleteFile(file);
             return Json("OK", JsonRequestBehavior.AllowGet);
         }
+
+
     }
 }
